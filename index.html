@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+  <!DOCTYPE html>
 <html lang="hi">
 <head>
 <meta charset="UTF-8">
@@ -6,100 +6,298 @@
 <title>Ekbal Playlist</title>
 
 <style>
-*{box-sizing:border-box}
+*{
+  box-sizing:border-box;
+}
+
 body{
   margin:0;
   font-family:Arial,sans-serif;
-  color:white;
-  background:linear-gradient(135deg,#090909,#24150b,#080808);
+  color:#fff;
   min-height:100vh;
+  background:
+    radial-gradient(circle at 80% 10%,#5a321b55,transparent 35%),
+    radial-gradient(circle at 10% 90%,#3b211455,transparent 35%),
+    linear-gradient(145deg,#050505,#17100b,#080808);
 }
+
 header{
-  padding:22px;
+  padding:22px 18px;
   text-align:center;
-  border-bottom:1px solid #ffffff18;
+  border-bottom:1px solid #ffffff12;
+  background:#050505aa;
+  backdrop-filter:blur(15px);
+  position:sticky;
+  top:0;
+  z-index:10;
 }
+
 .logo{
-  font-size:27px;
-  font-weight:bold;
+  font-size:25px;
+  font-weight:800;
   letter-spacing:3px;
 }
-.logo span{color:#e7a65c}
+
+.logo span{
+  color:#e7a65c;
+}
 
 .container{
   width:min(900px,92%);
-  margin:35px auto;
+  margin:0 auto;
 }
+
 .hero{
   text-align:center;
-  padding:35px 15px;
+  padding:45px 10px 30px;
 }
+
+.badge{
+  display:inline-block;
+  padding:7px 13px;
+  border-radius:30px;
+  background:#e7a65c18;
+  border:1px solid #e7a65c35;
+  color:#e7a65c;
+  font-size:12px;
+  letter-spacing:2px;
+  text-transform:uppercase;
+}
+
 .hero h1{
-  font-size:42px;
-  margin:10px 0;
+  font-size:44px;
+  margin:18px 0 10px;
 }
-.hero h1 span{color:#e7a65c}
-.hero p{color:#aaa}
+
+.hero h1 span{
+  color:#e7a65c;
+}
+
+.hero p{
+  color:#999;
+  margin:0;
+}
 
 .box{
-  background:#151515;
-  border:1px solid #ffffff15;
-  border-radius:20px;
+  background:linear-gradient(145deg,#171717dd,#0e0e0edd);
+  border:1px solid #ffffff12;
+  border-radius:24px;
   padding:22px;
-  box-shadow:0 15px 50px #0008;
+  box-shadow:0 20px 70px #000b;
+  backdrop-filter:blur(20px);
 }
+
 input{
   width:100%;
-  padding:16px;
-  border:1px solid #ffffff20;
-  border-radius:12px;
-  background:#090909;
-  color:white;
-  font-size:16px;
+  padding:17px;
+  border:1px solid #ffffff18;
+  border-radius:14px;
+  background:#070707;
+  color:#fff;
+  font-size:15px;
   outline:none;
 }
+
+input:focus{
+  border-color:#e7a65c88;
+  box-shadow:0 0 0 3px #e7a65c12;
+}
+
 button{
   width:100%;
   margin-top:12px;
-  padding:15px;
+  padding:16px;
   border:0;
-  border-radius:12px;
-  background:#e7a65c;
-  color:#17100a;
+  border-radius:14px;
+  background:linear-gradient(135deg,#f0b46c,#d98b3e);
+  color:#160e07;
   font-size:16px;
-  font-weight:bold;
+  font-weight:800;
   cursor:pointer;
+  transition:.2s;
 }
-button:hover{opacity:.9}
 
-.player{
-  margin-top:25px;
+button:hover{
+  transform:translateY(-1px);
+  opacity:.92;
+}
+
+/* MUSIC PLAYER */
+
+.music-player{
   display:none;
-  background:#111;
-  border-radius:18px;
-  overflow:hidden;
-}
-.player iframe{
-  width:100%;
-  height:500px;
-  border:0;
+  margin-top:22px;
+  padding:24px;
+  border-radius:22px;
+  background:
+    radial-gradient(circle at 85% 15%,#e7a65c22,transparent 30%),
+    linear-gradient(145deg,#1b120c,#0c0c0c);
+  border:1px solid #e7a65c25;
 }
 
-.info{
-  padding:20px;
-  color:#aaa;
+.cover{
+  width:120px;
+  height:120px;
+  margin:0 auto 18px;
+  border-radius:22px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:42px;
+  background:
+    linear-gradient(135deg,#3b2415,#0b0b0b);
+  border:1px solid #e7a65c35;
+  box-shadow:0 15px 40px #0009;
+}
+
+.now-playing{
   text-align:center;
 }
-footer{
-  text-align:center;
-  color:#666;
-  padding:30px;
+
+.now-playing h2{
+  margin:5px 0;
+  font-size:21px;
+}
+
+.now-playing p{
+  margin:0;
+  color:#888;
   font-size:13px;
 }
 
+.status{
+  margin-top:15px;
+  text-align:center;
+  color:#e7a65c;
+  font-size:13px;
+}
+
+/*
+  Invisible YouTube player.
+  Playback is handled by YouTube's official embed.
+*/
+.youtube-hidden{
+  position:absolute;
+  width:1px;
+  height:1px;
+  opacity:0;
+  pointer-events:none;
+  overflow:hidden;
+  left:-9999px;
+  top:-9999px;
+}
+
+.youtube-hidden iframe{
+  width:1px;
+  height:1px;
+  border:0;
+}
+
+/* TRENDING */
+
+.section-title{
+  margin:35px 0 15px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.section-title h2{
+  margin:0;
+  font-size:22px;
+}
+
+.section-title span{
+  color:#e7a65c;
+  font-size:12px;
+}
+
+.songs{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:13px;
+}
+
+.song{
+  padding:18px 14px;
+  border-radius:18px;
+  background:#111;
+  border:1px solid #ffffff10;
+  transition:.2s;
+}
+
+.song:hover{
+  transform:translateY(-3px);
+  border-color:#e7a65c35;
+}
+
+.song-number{
+  color:#e7a65c;
+  font-size:12px;
+  margin-bottom:15px;
+}
+
+.song-icon{
+  width:50px;
+  height:50px;
+  border-radius:14px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:#24170e;
+  font-size:21px;
+  margin-bottom:13px;
+}
+
+.song h3{
+  font-size:14px;
+  margin:0 0 5px;
+}
+
+.song p{
+  margin:0;
+  color:#777;
+  font-size:12px;
+}
+
+.info{
+  padding:20px 5px 5px;
+  color:#666;
+  text-align:center;
+  font-size:12px;
+}
+
+footer{
+  text-align:center;
+  color:#555;
+  padding:35px 20px;
+  font-size:12px;
+}
+
+/* MOBILE */
+
 @media(max-width:600px){
-  .hero h1{font-size:32px}
-  .player iframe{height:300px}
+
+  .hero{
+    padding:35px 5px 25px;
+  }
+
+  .hero h1{
+    font-size:34px;
+  }
+
+  .box{
+    padding:16px;
+  }
+
+  .songs{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .cover{
+    width:105px;
+    height:105px;
+  }
 }
 </style>
 </head>
@@ -107,15 +305,29 @@ footer{
 <body>
 
 <header>
-  <div class="logo">EKBAL <span>PLAYLIST</span></div>
+  <div class="logo">
+    EKBAL <span>PLAYLIST</span>
+  </div>
 </header>
 
 <div class="container">
 
   <section class="hero">
-    <h1>Feel the <span>Music.</span></h1>
-    <p>YouTube Playlist को यहाँ डालकर सुनें</p>
+
+    <div class="badge">
+      Trending Music
+    </div>
+
+    <h1>
+      Feel the <span>Music.</span>
+    </h1>
+
+    <p>
+      अपनी YouTube Playlist यहाँ डालकर सुनें
+    </p>
+
   </section>
+
 
   <div class="box">
 
@@ -126,63 +338,189 @@ footer{
     >
 
     <button onclick="loadPlaylist()">
-      ▶ Play Playlist
+      ▶ Start Listening
     </button>
 
-    <div class="player" id="player">
-      <iframe
-        id="youtube"
-        allow="autoplay; encrypted-media; picture-in-picture"
-        allowfullscreen>
-      </iframe>
+
+    <!-- MUSIC PLAYER -->
+
+    <div class="music-player" id="musicPlayer">
+
+      <div class="cover">
+        🎵
+      </div>
+
+      <div class="now-playing">
+
+        <h2>
+          Ekbal Playlist
+        </h2>
+
+        <p>
+          Your playlist is playing
+        </p>
+
+      </div>
+
+      <div class="status" id="status">
+        ● Now Playing
+      </div>
+
     </div>
 
+
+    <!-- Hidden YouTube player -->
+
+    <div class="youtube-hidden">
+
+      <iframe
+        id="youtube"
+        allow="autoplay; encrypted-media"
+        title="YouTube Music Player">
+      </iframe>
+
+    </div>
+
+
     <div class="info">
-      YouTube के official embedded player का इस्तेमाल किया जा रहा है।
+      🎧 Music mode enabled · YouTube playback
+    </div>
+
+  </div>
+
+
+  <!-- TRENDING -->
+
+  <div class="section-title">
+
+    <h2>
+      🔥 Trending Songs
+    </h2>
+
+    <span>
+      EKBAL
+    </span>
+
+  </div>
+
+
+  <div class="songs">
+
+    <div class="song">
+      <div class="song-number">#01</div>
+      <div class="song-icon">🎧</div>
+      <h3>Trending Song</h3>
+      <p>Now Trending</p>
+    </div>
+
+    <div class="song">
+      <div class="song-number">#02</div>
+      <div class="song-icon">🎵</div>
+      <h3>Popular Music</h3>
+      <p>Top Playlist</p>
+    </div>
+
+    <div class="song">
+      <div class="song-number">#03</div>
+      <div class="song-icon">🔥</div>
+      <h3>Hot Right Now</h3>
+      <p>Trending</p>
+    </div>
+
+    <div class="song">
+      <div class="song-number">#04</div>
+      <div class="song-icon">💿</div>
+      <h3>New Release</h3>
+      <p>Fresh Music</p>
+    </div>
+
+    <div class="song">
+      <div class="song-number">#05</div>
+      <div class="song-icon">🎶</div>
+      <h3>Top Hits</h3>
+      <p>Most Played</p>
+    </div>
+
+    <div class="song">
+      <div class="song-number">#06</div>
+      <div class="song-icon">⭐</div>
+      <h3>Fan Favourite</h3>
+      <p>Popular Now</p>
     </div>
 
   </div>
 
 </div>
 
+
 <footer>
-  © 2026 Ekbal Playlist
+  © 2026 Ekbal Playlist · Feel the Music.
 </footer>
 
+
 <script>
+
 function loadPlaylist(){
 
-  const input = document.getElementById("playlist").value.trim();
+  const input =
+    document.getElementById("playlist").value.trim();
 
   if(!input){
+
     alert("पहले YouTube Playlist Link डालें");
+
     return;
   }
+
 
   try{
 
     const url = new URL(input);
-    const playlistId = url.searchParams.get("list");
+
+    const playlistId =
+      url.searchParams.get("list");
+
 
     if(!playlistId){
-      alert("यह YouTube Playlist Link नहीं लग रहा है।");
+
+      alert(
+        "यह YouTube Playlist Link नहीं लग रहा है।"
+      );
+
       return;
     }
 
-    const embed =
-      "https://www.youtube.com/embed?listType=playlist&list="
-      + encodeURIComponent(playlistId)
-      + "&autoplay=1";
 
-    document.getElementById("youtube").src = embed;
-    document.getElementById("player").style.display = "block";
+    const embed =
+      "https://www.youtube.com/embed?" +
+      "listType=playlist" +
+      "&list=" +
+      encodeURIComponent(playlistId) +
+      "&autoplay=1";
+
+
+    document.getElementById("youtube").src =
+      embed;
+
+
+    document.getElementById("musicPlayer")
+      .style.display = "block";
+
+
+    document.getElementById("status")
+      .textContent = "● Now Playing";
+
 
   }catch(error){
 
-    alert("कृपया सही YouTube Playlist Link डालें।");
+    alert(
+      "कृपया सही YouTube Playlist Link डालें।"
+    );
 
   }
+
 }
+
 </script>
 
 </body>
