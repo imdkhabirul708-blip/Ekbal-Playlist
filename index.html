@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ekbal Playlist</title>
+
+<style>
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:Arial,sans-serif;
+  color:white;
+  background:linear-gradient(135deg,#090909,#24150b,#080808);
+  min-height:100vh;
+}
+header{
+  padding:22px;
+  text-align:center;
+  border-bottom:1px solid #ffffff18;
+}
+.logo{
+  font-size:27px;
+  font-weight:bold;
+  letter-spacing:3px;
+}
+.logo span{color:#e7a65c}
+
+.container{
+  width:min(900px,92%);
+  margin:35px auto;
+}
+.hero{
+  text-align:center;
+  padding:35px 15px;
+}
+.hero h1{
+  font-size:42px;
+  margin:10px 0;
+}
+.hero h1 span{color:#e7a65c}
+.hero p{color:#aaa}
+
+.box{
+  background:#151515;
+  border:1px solid #ffffff15;
+  border-radius:20px;
+  padding:22px;
+  box-shadow:0 15px 50px #0008;
+}
+input{
+  width:100%;
+  padding:16px;
+  border:1px solid #ffffff20;
+  border-radius:12px;
+  background:#090909;
+  color:white;
+  font-size:16px;
+  outline:none;
+}
+button{
+  width:100%;
+  margin-top:12px;
+  padding:15px;
+  border:0;
+  border-radius:12px;
+  background:#e7a65c;
+  color:#17100a;
+  font-size:16px;
+  font-weight:bold;
+  cursor:pointer;
+}
+button:hover{opacity:.9}
+
+.player{
+  margin-top:25px;
+  display:none;
+  background:#111;
+  border-radius:18px;
+  overflow:hidden;
+}
+.player iframe{
+  width:100%;
+  height:500px;
+  border:0;
+}
+
+.info{
+  padding:20px;
+  color:#aaa;
+  text-align:center;
+}
+footer{
+  text-align:center;
+  color:#666;
+  padding:30px;
+  font-size:13px;
+}
+
+@media(max-width:600px){
+  .hero h1{font-size:32px}
+  .player iframe{height:300px}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo">EKBAL <span>PLAYLIST</span></div>
+</header>
+
+<div class="container">
+
+  <section class="hero">
+    <h1>Feel the <span>Music.</span></h1>
+    <p>YouTube Playlist को यहाँ डालकर सुनें</p>
+  </section>
+
+  <div class="box">
+
+    <input
+      id="playlist"
+      type="text"
+      placeholder="YouTube Playlist Link यहाँ डालें..."
+    >
+
+    <button onclick="loadPlaylist()">
+      ▶ Play Playlist
+    </button>
+
+    <div class="player" id="player">
+      <iframe
+        id="youtube"
+        allow="autoplay; encrypted-media; picture-in-picture"
+        allowfullscreen>
+      </iframe>
+    </div>
+
+    <div class="info">
+      YouTube के official embedded player का इस्तेमाल किया जा रहा है।
+    </div>
+
+  </div>
+
+</div>
+
+<footer>
+  © 2026 Ekbal Playlist
+</footer>
+
+<script>
+function loadPlaylist(){
+
+  const input = document.getElementById("playlist").value.trim();
+
+  if(!input){
+    alert("पहले YouTube Playlist Link डालें");
+    return;
+  }
+
+  try{
+
+    const url = new URL(input);
+    const playlistId = url.searchParams.get("list");
+
+    if(!playlistId){
+      alert("यह YouTube Playlist Link नहीं लग रहा है।");
+      return;
+    }
+
+    const embed =
+      "https://www.youtube.com/embed?listType=playlist&list="
+      + encodeURIComponent(playlistId)
+      + "&autoplay=1";
+
+    document.getElementById("youtube").src = embed;
+    document.getElementById("player").style.display = "block";
+
+  }catch(error){
+
+    alert("कृपया सही YouTube Playlist Link डालें।");
+
+  }
+}
+</script>
+
+</body>
+</html>
