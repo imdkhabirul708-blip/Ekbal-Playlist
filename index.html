@@ -1,481 +1,932 @@
-  <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="hi">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Ekbal Playlist</title>
 
 <style>
+
 *{
   box-sizing:border-box;
 }
 
 body{
   margin:0;
-  font-family:Arial,sans-serif;
+  font-family:Arial,Helvetica,sans-serif;
   color:#fff;
   min-height:100vh;
+
   background:
-    radial-gradient(circle at 80% 10%,#5a321b55,transparent 35%),
-    radial-gradient(circle at 10% 90%,#3b211455,transparent 35%),
-    linear-gradient(145deg,#050505,#17100b,#080808);
+    radial-gradient(circle at 80% 15%,#a8612b30,transparent 28%),
+    radial-gradient(circle at 15% 80%,#6b3c1c22,transparent 30%),
+    linear-gradient(145deg,#030303,#100b08,#050505);
+
+  overflow-x:hidden;
 }
 
+
+/* HEADER */
+
 header{
-  padding:22px 18px;
+  padding:22px 20px;
   text-align:center;
+
+  background:#050505bb;
   border-bottom:1px solid #ffffff12;
-  background:#050505aa;
-  backdrop-filter:blur(15px);
+
+  backdrop-filter:blur(18px);
+
   position:sticky;
   top:0;
-  z-index:10;
+  z-index:20;
 }
 
 .logo{
-  font-size:25px;
+  font-size:24px;
   font-weight:800;
-  letter-spacing:3px;
+  letter-spacing:4px;
 }
 
 .logo span{
-  color:#e7a65c;
+  color:#e5a35d;
 }
 
+
+/* MAIN */
+
 .container{
-  width:min(900px,92%);
-  margin:0 auto;
+  width:min(950px,92%);
+  margin:auto;
 }
+
+
+/* HERO */
 
 .hero{
   text-align:center;
-  padding:45px 10px 30px;
+  padding:45px 10px 28px;
 }
 
-.badge{
-  display:inline-block;
-  padding:7px 13px;
-  border-radius:30px;
-  background:#e7a65c18;
-  border:1px solid #e7a65c35;
-  color:#e7a65c;
-  font-size:12px;
-  letter-spacing:2px;
-  text-transform:uppercase;
+.hero small{
+  color:#e5a35d;
+  letter-spacing:3px;
+  font-size:11px;
 }
 
 .hero h1{
-  font-size:44px;
-  margin:18px 0 10px;
+  font-size:46px;
+  margin:14px 0 8px;
 }
 
 .hero h1 span{
-  color:#e7a65c;
+  color:#e5a35d;
 }
 
 .hero p{
-  color:#999;
+  color:#888;
   margin:0;
 }
 
-.box{
-  background:linear-gradient(145deg,#171717dd,#0e0e0edd);
-  border:1px solid #ffffff12;
+
+/* SEARCH CARD */
+
+.search-card{
+  padding:20px;
+
   border-radius:24px;
-  padding:22px;
-  box-shadow:0 20px 70px #000b;
-  backdrop-filter:blur(20px);
+
+  background:
+    linear-gradient(145deg,#18120e,#0b0b0b);
+
+  border:1px solid #ffffff12;
+
+  box-shadow:
+    0 25px 70px #000b;
 }
+
 
 input{
   width:100%;
-  padding:17px;
-  border:1px solid #ffffff18;
-  border-radius:14px;
-  background:#070707;
+
+  padding:17px 18px;
+
+  border-radius:15px;
+
+  border:1px solid #ffffff16;
+
+  background:#050505;
+
   color:#fff;
+
   font-size:15px;
+
   outline:none;
 }
 
 input:focus{
-  border-color:#e7a65c88;
-  box-shadow:0 0 0 3px #e7a65c12;
+  border-color:#e5a35d88;
+
+  box-shadow:
+    0 0 0 3px #e5a35d12;
 }
 
-button{
+
+.main-button{
   width:100%;
+
   margin-top:12px;
+
   padding:16px;
+
   border:0;
-  border-radius:14px;
-  background:linear-gradient(135deg,#f0b46c,#d98b3e);
-  color:#160e07;
-  font-size:16px;
+
+  border-radius:15px;
+
+  background:
+    linear-gradient(135deg,#f1b873,#c87932);
+
+  color:#170d05;
+
   font-weight:800;
+
+  font-size:16px;
+
   cursor:pointer;
+
   transition:.2s;
 }
 
-button:hover{
-  transform:translateY(-1px);
-  opacity:.92;
+.main-button:hover{
+  transform:translateY(-2px);
 }
+
 
 /* MUSIC PLAYER */
 
-.music-player{
+.player{
   display:none;
+
   margin-top:22px;
-  padding:24px;
-  border-radius:22px;
-  background:
-    radial-gradient(circle at 85% 15%,#e7a65c22,transparent 30%),
-    linear-gradient(145deg,#1b120c,#0c0c0c);
-  border:1px solid #e7a65c25;
-}
 
-.cover{
-  width:120px;
-  height:120px;
-  margin:0 auto 18px;
-  border-radius:22px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:42px;
-  background:
-    linear-gradient(135deg,#3b2415,#0b0b0b);
-  border:1px solid #e7a65c35;
-  box-shadow:0 15px 40px #0009;
-}
+  padding:28px 20px 22px;
 
-.now-playing{
+  border-radius:28px;
+
+  background:
+    radial-gradient(circle at 50% 0%,#b46a2b25,transparent 40%),
+    linear-gradient(160deg,#1b120c,#090909);
+
+  border:1px solid #e5a35d25;
+
+  box-shadow:
+    0 25px 80px #000c;
+
   text-align:center;
 }
 
-.now-playing h2{
-  margin:5px 0;
-  font-size:21px;
+
+/* ALBUM ART */
+
+.album{
+  width:190px;
+  height:190px;
+
+  margin:0 auto 22px;
+
+  border-radius:32px;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  position:relative;
+
+  background:
+    radial-gradient(circle at 35% 30%,#f0bb79,#7b401c 35%,#140b06 75%);
+
+  box-shadow:
+    0 25px 55px #000c,
+    0 0 45px #e5a35d22;
+
+  animation:float 4s ease-in-out infinite;
 }
 
-.now-playing p{
-  margin:0;
+.album:before{
+  content:"";
+
+  position:absolute;
+
+  inset:-7px;
+
+  border-radius:37px;
+
+  border:1px solid #e5a35d55;
+}
+
+.album-icon{
+  font-size:65px;
+
+  filter:drop-shadow(0 8px 12px #0008);
+}
+
+
+@keyframes float{
+
+  0%,100%{
+    transform:translateY(0);
+  }
+
+  50%{
+    transform:translateY(-7px);
+  }
+
+}
+
+
+/* SONG INFO */
+
+.song-title{
+  font-size:24px;
+  font-weight:800;
+
+  margin:5px 0;
+}
+
+.song-subtitle{
   color:#888;
   font-size:13px;
 }
 
-.status{
-  margin-top:15px;
-  text-align:center;
-  color:#e7a65c;
-  font-size:13px;
+
+/* VISUALIZER */
+
+.visualizer{
+  height:45px;
+
+  margin:25px auto 15px;
+
+  display:flex;
+
+  align-items:center;
+  justify-content:center;
+
+  gap:5px;
 }
 
-/*
-  Invisible YouTube player.
-  Playback is handled by YouTube's official embed.
-*/
-.youtube-hidden{
-  position:absolute;
-  width:1px;
-  height:1px;
-  opacity:0;
-  pointer-events:none;
+.bar{
+  width:4px;
+
+  height:15px;
+
+  border-radius:10px;
+
+  background:#e5a35d;
+
+  animation:wave 1s ease-in-out infinite;
+}
+
+.bar:nth-child(2){animation-delay:.1s}
+.bar:nth-child(3){animation-delay:.2s}
+.bar:nth-child(4){animation-delay:.3s}
+.bar:nth-child(5){animation-delay:.4s}
+.bar:nth-child(6){animation-delay:.5s}
+.bar:nth-child(7){animation-delay:.4s}
+.bar:nth-child(8){animation-delay:.3s}
+.bar:nth-child(9){animation-delay:.2s}
+.bar:nth-child(10){animation-delay:.1s}
+
+@keyframes wave{
+
+  0%,100%{
+    height:12px;
+  }
+
+  50%{
+    height:42px;
+  }
+
+}
+
+
+/* PROGRESS */
+
+.progress{
+  width:100%;
+
+  height:4px;
+
+  background:#ffffff15;
+
+  border-radius:10px;
+
   overflow:hidden;
-  left:-9999px;
-  top:-9999px;
+
+  margin:10px 0 8px;
 }
 
-.youtube-hidden iframe{
-  width:1px;
-  height:1px;
-  border:0;
+.progress span{
+  display:block;
+
+  width:35%;
+
+  height:100%;
+
+  background:#e5a35d;
+
+  border-radius:10px;
 }
+
+.time{
+  display:flex;
+
+  justify-content:space-between;
+
+  color:#666;
+
+  font-size:11px;
+}
+
+
+/* CONTROLS */
+
+.controls{
+  display:flex;
+
+  align-items:center;
+  justify-content:center;
+
+  gap:18px;
+
+  margin-top:22px;
+}
+
+.control{
+  width:46px;
+  height:46px;
+
+  border-radius:50%;
+
+  border:1px solid #ffffff12;
+
+  background:#ffffff08;
+
+  color:#fff;
+
+  font-size:18px;
+
+  cursor:pointer;
+}
+
+.control:hover{
+  background:#e5a35d22;
+}
+
+.play{
+  width:62px;
+  height:62px;
+
+  border-radius:50%;
+
+  border:0;
+
+  background:
+    linear-gradient(135deg,#f1b873,#c87932);
+
+  color:#160c04;
+
+  font-size:23px;
+
+  font-weight:bold;
+
+  cursor:pointer;
+
+  box-shadow:
+    0 10px 30px #e5a35d25;
+}
+
+
+/* STATUS */
+
+.status{
+  margin-top:18px;
+
+  color:#e5a35d;
+
+  font-size:12px;
+
+  letter-spacing:1px;
+}
+
 
 /* TRENDING */
 
-.section-title{
-  margin:35px 0 15px;
+.trending{
+  margin-top:38px;
+}
+
+.section-head{
   display:flex;
+
   justify-content:space-between;
+
   align-items:center;
-}
 
-.section-title h2{
-  margin:0;
-  font-size:22px;
-}
-
-.section-title span{
-  color:#e7a65c;
-  font-size:12px;
-}
-
-.songs{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:13px;
-}
-
-.song{
-  padding:18px 14px;
-  border-radius:18px;
-  background:#111;
-  border:1px solid #ffffff10;
-  transition:.2s;
-}
-
-.song:hover{
-  transform:translateY(-3px);
-  border-color:#e7a65c35;
-}
-
-.song-number{
-  color:#e7a65c;
-  font-size:12px;
   margin-bottom:15px;
 }
 
-.song-icon{
-  width:50px;
-  height:50px;
-  border-radius:14px;
+.section-head h2{
+  margin:0;
+
+  font-size:22px;
+}
+
+.section-head span{
+  color:#e5a35d;
+
+  font-size:11px;
+
+  letter-spacing:2px;
+}
+
+
+.song-grid{
+  display:grid;
+
+  grid-template-columns:
+    repeat(3,1fr);
+
+  gap:13px;
+}
+
+
+.card{
+  padding:18px;
+
+  border-radius:20px;
+
+  background:#0e0e0e;
+
+  border:1px solid #ffffff10;
+
+  transition:.2s;
+}
+
+.card:hover{
+  transform:translateY(-4px);
+
+  border-color:#e5a35d40;
+}
+
+.rank{
+  color:#e5a35d;
+
+  font-size:11px;
+
+  font-weight:bold;
+}
+
+.card-icon{
+  width:48px;
+  height:48px;
+
   display:flex;
   align-items:center;
   justify-content:center;
-  background:#24170e;
+
+  margin:13px 0;
+
+  border-radius:14px;
+
+  background:#25170d;
+
   font-size:21px;
-  margin-bottom:13px;
 }
 
-.song h3{
-  font-size:14px;
+.card h3{
   margin:0 0 5px;
+
+  font-size:14px;
 }
 
-.song p{
+.card p{
   margin:0;
-  color:#777;
-  font-size:12px;
+
+  color:#666;
+
+  font-size:11px;
 }
 
-.info{
-  padding:20px 5px 5px;
-  color:#666;
-  text-align:center;
-  font-size:12px;
-}
+
+/* FOOTER */
 
 footer{
   text-align:center;
-  color:#555;
-  padding:35px 20px;
+
+  color:#4d4d4d;
+
+  padding:40px 20px;
+
   font-size:12px;
 }
+
+
+/* HIDDEN YOUTUBE */
+
+.hidden-youtube{
+  position:absolute;
+
+  width:1px;
+  height:1px;
+
+  left:-10000px;
+  top:-10000px;
+
+  opacity:0;
+
+  overflow:hidden;
+
+  pointer-events:none;
+}
+
+.hidden-youtube iframe{
+  width:1px;
+  height:1px;
+
+  border:0;
+}
+
 
 /* MOBILE */
 
 @media(max-width:600px){
 
-  .hero{
-    padding:35px 5px 25px;
-  }
-
   .hero h1{
-    font-size:34px;
+    font-size:35px;
   }
 
-  .box{
-    padding:16px;
+  .album{
+    width:160px;
+    height:160px;
   }
 
-  .songs{
-    grid-template-columns:repeat(2,1fr);
+  .song-grid{
+    grid-template-columns:
+      repeat(2,1fr);
   }
 
-  .cover{
-    width:105px;
-    height:105px;
+  .player{
+    padding:24px 15px;
   }
+
 }
+
 </style>
 </head>
 
+
 <body>
 
+
 <header>
+
   <div class="logo">
     EKBAL <span>PLAYLIST</span>
   </div>
+
 </header>
+
 
 <div class="container">
 
-  <section class="hero">
 
-    <div class="badge">
-      Trending Music
-    </div>
+<section class="hero">
 
-    <h1>
-      Feel the <span>Music.</span>
-    </h1>
+  <small>YOUR PERSONAL MUSIC SPACE</small>
 
-    <p>
-      अपनी YouTube Playlist यहाँ डालकर सुनें
-    </p>
+  <h1>
+    Feel the <span>Music.</span>
+  </h1>
 
-  </section>
+  <p>
+    अपनी पसंद की YouTube Playlist सुनें
+  </p>
 
-
-  <div class="box">
-
-    <input
-      id="playlist"
-      type="text"
-      placeholder="YouTube Playlist Link यहाँ डालें..."
-    >
-
-    <button onclick="loadPlaylist()">
-      ▶ Start Listening
-    </button>
+</section>
 
 
-    <!-- MUSIC PLAYER -->
+<div class="search-card">
 
-    <div class="music-player" id="musicPlayer">
+  <input
+    id="playlist"
+    type="text"
+    placeholder="YouTube Playlist Link यहाँ डालें..."
+  >
 
-      <div class="cover">
+  <button
+    class="main-button"
+    onclick="loadPlaylist()">
+
+    ▶ Start Listening
+
+  </button>
+
+
+  <!-- PREMIUM PLAYER -->
+
+  <div
+    class="player"
+    id="player">
+
+
+    <div class="album">
+
+      <div class="album-icon">
         🎵
       </div>
 
-      <div class="now-playing">
+    </div>
 
-        <h2>
-          Ekbal Playlist
-        </h2>
 
-        <p>
-          Your playlist is playing
-        </p>
+    <div class="song-title">
+      Ekbal Playlist
+    </div>
 
-      </div>
+    <div class="song-subtitle">
+      Your Music · Now Playing
+    </div>
 
-      <div class="status" id="status">
-        ● Now Playing
-      </div>
+
+    <div class="visualizer">
+
+      <span class="bar"></span>
+      <span class="bar"></span>
+      <span class="bar"></span>
+      <span class="bar"></span>
+      <span class="bar"></span>
+      <span class="bar"></span>
+      <span class="bar"></span>
+      <span class="bar"></span>
+      <span class="bar"></span>
+      <span class="bar"></span>
 
     </div>
 
 
-    <!-- Hidden YouTube player -->
+    <div class="progress">
+      <span></span>
+    </div>
 
-    <div class="youtube-hidden">
+    <div class="time">
+      <span>0:00</span>
+      <span>Now Playing</span>
+    </div>
 
-      <iframe
-        id="youtube"
-        allow="autoplay; encrypted-media"
-        title="YouTube Music Player">
-      </iframe>
+
+    <div class="controls">
+
+      <button
+        class="control"
+        onclick="previousSong()">
+        ⏮
+      </button>
+
+      <button
+        class="play"
+        onclick="togglePlay()"
+        id="playButton">
+        ▶
+      </button>
+
+      <button
+        class="control"
+        onclick="nextSong()">
+        ⏭
+      </button>
 
     </div>
 
 
-    <div class="info">
-      🎧 Music mode enabled · YouTube playback
+    <div
+      class="status"
+      id="status">
+
+      ● READY TO PLAY
+
     </div>
 
   </div>
 
 
-  <!-- TRENDING -->
+  <!-- YOUTUBE EMBED -->
 
-  <div class="section-title">
+  <div class="hidden-youtube">
 
-    <h2>
-      🔥 Trending Songs
-    </h2>
-
-    <span>
-      EKBAL
-    </span>
-
-  </div>
-
-
-  <div class="songs">
-
-    <div class="song">
-      <div class="song-number">#01</div>
-      <div class="song-icon">🎧</div>
-      <h3>Trending Song</h3>
-      <p>Now Trending</p>
-    </div>
-
-    <div class="song">
-      <div class="song-number">#02</div>
-      <div class="song-icon">🎵</div>
-      <h3>Popular Music</h3>
-      <p>Top Playlist</p>
-    </div>
-
-    <div class="song">
-      <div class="song-number">#03</div>
-      <div class="song-icon">🔥</div>
-      <h3>Hot Right Now</h3>
-      <p>Trending</p>
-    </div>
-
-    <div class="song">
-      <div class="song-number">#04</div>
-      <div class="song-icon">💿</div>
-      <h3>New Release</h3>
-      <p>Fresh Music</p>
-    </div>
-
-    <div class="song">
-      <div class="song-number">#05</div>
-      <div class="song-icon">🎶</div>
-      <h3>Top Hits</h3>
-      <p>Most Played</p>
-    </div>
-
-    <div class="song">
-      <div class="song-number">#06</div>
-      <div class="song-icon">⭐</div>
-      <h3>Fan Favourite</h3>
-      <p>Popular Now</p>
-    </div>
+    <iframe
+      id="youtube"
+      allow="autoplay; encrypted-media"
+      title="YouTube Playlist">
+    </iframe>
 
   </div>
 
 </div>
 
 
+<!-- TRENDING -->
+
+<section class="trending">
+
+  <div class="section-head">
+
+    <h2>
+      🔥 Trending Songs
+    </h2>
+
+    <span>
+      EKBAL CHART
+    </span>
+
+  </div>
+
+
+  <div class="song-grid">
+
+
+    <div class="card">
+
+      <div class="rank">
+        #01 TRENDING
+      </div>
+
+      <div class="card-icon">
+        🎧
+      </div>
+
+      <h3>
+        Trending Now
+      </h3>
+
+      <p>
+        Top Music
+      </p>
+
+    </div>
+
+
+    <div class="card">
+
+      <div class="rank">
+        #02 TRENDING
+      </div>
+
+      <div class="card-icon">
+        🔥
+      </div>
+
+      <h3>
+        Hot Hits
+      </h3>
+
+      <p>
+        Popular Music
+      </p>
+
+    </div>
+
+
+    <div class="card">
+
+      <div class="rank">
+        #03 TRENDING
+      </div>
+
+      <div class="card-icon">
+        🎶
+      </div>
+
+      <h3>
+        New Music
+      </h3>
+
+      <p>
+        Fresh Releases
+      </p>
+
+    </div>
+
+
+    <div class="card">
+
+      <div class="rank">
+        #04 TRENDING
+      </div>
+
+      <div class="card-icon">
+        💿
+      </div>
+
+      <h3>
+        Top Playlist
+      </h3>
+
+      <p>
+        Most Played
+      </p>
+
+    </div>
+
+
+    <div class="card">
+
+      <div class="rank">
+        #05 TRENDING
+      </div>
+
+      <div class="card-icon">
+        ⭐
+      </div>
+
+      <h3>
+        Fan Favourite
+      </h3>
+
+      <p>
+        Popular Today
+      </p>
+
+    </div>
+
+
+    <div class="card">
+
+      <div class="rank">
+        #06 TRENDING
+      </div>
+
+      <div class="card-icon">
+        🎵
+      </div>
+
+      <h3>
+        Ekbal Picks
+      </h3>
+
+      <p>
+        Editor Choice
+      </p>
+
+    </div>
+
+
+  </div>
+
+</section>
+
+
 <footer>
+
   © 2026 Ekbal Playlist · Feel the Music.
+
 </footer>
+
+
+</div>
 
 
 <script>
 
+let isPlaying = true;
+
+
+/* LOAD PLAYLIST */
+
 function loadPlaylist(){
 
   const input =
-    document.getElementById("playlist").value.trim();
+    document
+    .getElementById("playlist")
+    .value
+    .trim();
+
 
   if(!input){
 
-    alert("पहले YouTube Playlist Link डालें");
+    alert(
+      "पहले YouTube Playlist Link डालें"
+    );
 
     return;
+
   }
 
 
   try{
 
-    const url = new URL(input);
+    const url =
+      new URL(input);
+
 
     const playlistId =
       url.searchParams.get("list");
@@ -484,34 +935,48 @@ function loadPlaylist(){
     if(!playlistId){
 
       alert(
-        "यह YouTube Playlist Link नहीं लग रहा है।"
+        "यह सही YouTube Playlist Link नहीं है।"
       );
 
       return;
+
     }
 
 
     const embed =
-      "https://www.youtube.com/embed?" +
-      "listType=playlist" +
+      "https://www.youtube.com/embed/" +
+      "?listType=playlist" +
       "&list=" +
       encodeURIComponent(playlistId) +
       "&autoplay=1";
 
 
-    document.getElementById("youtube").src =
-      embed;
+    document
+      .getElementById("youtube")
+      .src = embed;
 
 
-    document.getElementById("musicPlayer")
+    document
+      .getElementById("player")
       .style.display = "block";
 
 
-    document.getElementById("status")
-      .textContent = "● Now Playing";
+    document
+      .getElementById("status")
+      .textContent =
+      "● NOW PLAYING";
 
 
-  }catch(error){
+    document
+      .getElementById("playButton")
+      .textContent = "❚❚";
+
+
+    isPlaying = true;
+
+  }
+
+  catch(error){
 
     alert(
       "कृपया सही YouTube Playlist Link डालें।"
@@ -521,7 +986,68 @@ function loadPlaylist(){
 
 }
 
+
+/* PLAY / PAUSE */
+
+function togglePlay(){
+
+  const button =
+    document
+    .getElementById("playButton");
+
+
+  if(isPlaying){
+
+    button.textContent = "▶";
+
+    document
+      .getElementById("status")
+      .textContent =
+      "● PAUSED";
+
+    isPlaying = false;
+
+  }
+
+  else{
+
+    button.textContent = "❚❚";
+
+    document
+      .getElementById("status")
+      .textContent =
+      "● NOW PLAYING";
+
+    isPlaying = true;
+
+  }
+
+}
+
+
+/* DEMO CONTROLS */
+
+function previousSong(){
+
+  document
+    .getElementById("status")
+    .textContent =
+    "● PREVIOUS SONG";
+
+}
+
+
+function nextSong(){
+
+  document
+    .getElementById("status")
+    .textContent =
+    "● NEXT SONG";
+
+}
+
 </script>
+
 
 </body>
 </html>
