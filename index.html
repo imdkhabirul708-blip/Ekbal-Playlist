@@ -7,7 +7,6 @@
 <title>Ekbal Playlist</title>
 
 <style>
-
 *{
   box-sizing:border-box;
 }
@@ -17,7 +16,6 @@ body{
   font-family:Arial,sans-serif;
   color:white;
   min-height:100vh;
-
   background:
     radial-gradient(circle at top right,#8b4f2530,transparent 35%),
     linear-gradient(135deg,#050505,#21140b,#080808);
@@ -62,78 +60,39 @@ header{
   color:#999;
 }
 
-.box{
-  background:#121212;
-  border:1px solid #ffffff15;
-  border-radius:22px;
-  padding:22px;
-  box-shadow:0 20px 60px #0009;
-}
-
-input{
-  width:100%;
-  padding:16px;
-  border-radius:12px;
-  border:1px solid #ffffff20;
-  background:#080808;
-  color:white;
-  font-size:15px;
-  outline:none;
-}
-
-button{
-  width:100%;
-  margin-top:12px;
-  padding:15px;
-  border:0;
-  border-radius:12px;
-  background:#e7a65c;
-  color:#160d06;
-  font-size:16px;
-  font-weight:bold;
-  cursor:pointer;
-}
-
-button:hover{
-  opacity:.9;
-}
-
-/* SIMPLE MUSIC PLAYER */
-
 .player{
-  display:none;
-  margin-top:22px;
-  padding:25px;
+  padding:28px 20px;
   text-align:center;
-  border-radius:20px;
+  border-radius:22px;
 
   background:
     linear-gradient(145deg,#24170d,#0d0d0d);
 
   border:1px solid #e7a65c25;
+  box-shadow:0 20px 60px #0009;
 }
 
 .music-icon{
-  width:110px;
-  height:110px;
+  width:130px;
+  height:130px;
   margin:auto;
 
   display:flex;
   align-items:center;
   justify-content:center;
 
-  border-radius:25px;
+  border-radius:30px;
 
   background:
-    linear-gradient(135deg,#6f3b19,#15100c);
+    linear-gradient(135deg,#8b4c21,#17100b);
 
-  font-size:48px;
+  font-size:55px;
 
-  box-shadow:0 15px 35px #000b;
+  box-shadow:0 18px 40px #000b;
 }
 
 .player h2{
-  margin:18px 0 5px;
+  margin:20px 0 6px;
 }
 
 .player p{
@@ -141,131 +100,68 @@ button:hover{
   font-size:13px;
 }
 
-.play-status{
+.status{
   margin-top:18px;
   color:#e7a65c;
   font-size:13px;
 }
 
-/* TRENDING */
-
-.trending{
-  margin-top:35px;
+.youtube{
+  margin-top:20px;
+  width:100%;
+  border-radius:15px;
+  overflow:hidden;
 }
 
-.trending h2{
-  font-size:22px;
-}
-
-.songs{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:12px;
-}
-
-.song{
-  padding:18px;
-  border-radius:16px;
-  background:#111;
-  border:1px solid #ffffff10;
-}
-
-.song-number{
-  color:#e7a65c;
-  font-size:12px;
-}
-
-.song-icon{
-  margin:12px 0;
-  font-size:25px;
-}
-
-.song h3{
-  margin:0;
-  font-size:14px;
-}
-
-.song p{
-  color:#666;
-  font-size:11px;
+.youtube iframe{
+  width:100%;
+  height:120px;
+  border:0;
 }
 
 footer{
   text-align:center;
   color:#555;
-  padding:35px;
+  padding:40px;
   font-size:12px;
 }
 
-/* HIDDEN YOUTUBE */
-
-#youtube{
-  position:absolute;
-  width:1px;
-  height:1px;
-  left:-9999px;
-  top:-9999px;
-  opacity:0;
-}
-
 @media(max-width:600px){
-
   .hero h1{
     font-size:32px;
   }
 
-  .songs{
-    grid-template-columns:repeat(2,1fr);
+  .youtube iframe{
+    height:100px;
   }
-
 }
-
 </style>
 </head>
 
 <body>
 
 <header>
-
   <div class="logo">
     EKBAL <span>PLAYLIST</span>
   </div>
-
 </header>
-
 
 <div class="container">
 
+  <section class="hero">
 
-<section class="hero">
+    <h1>
+      Feel the <span>Music.</span>
+    </h1>
 
-  <h1>
-    Feel the <span>Music.</span>
-  </h1>
+    <p>
+      Welcome to Ekbal Playlist
+    </p>
 
-  <p>
-    YouTube Playlist यहाँ डालकर सुनें
-  </p>
-
-</section>
-
-
-<div class="box">
-
-  <input
-    id="playlist"
-    type="text"
-    placeholder="YouTube Playlist Link यहाँ डालें..."
-  >
-
-  <button onclick="loadPlaylist()">
-    ▶ Play Playlist
-  </button>
+  </section>
 
 
-  <div
-    class="player"
-    id="player">
+  <div class="player">
 
     <div class="music-icon">
       🎵
@@ -276,148 +172,35 @@ footer{
     </h2>
 
     <p>
-      Your playlist is playing
+      Your music playlist
     </p>
 
-    <div
-      class="play-status"
-      id="status">
-
+    <div class="status">
       ● NOW PLAYING
+    </div>
+
+
+    <!-- YOUR FIXED YOUTUBE PLAYLIST -->
+
+    <div class="youtube">
+
+      <iframe
+        src="https://www.youtube.com/embed?listType=playlist&list=PLFtitMDpwfKY"
+        title="Ekbal Playlist"
+        allow="autoplay; encrypted-media; picture-in-picture"
+        allowfullscreen>
+      </iframe>
 
     </div>
 
   </div>
-
-
-  <iframe
-    id="youtube"
-    allow="autoplay; encrypted-media">
-  </iframe>
-
 
 </div>
-
-
-<section class="trending">
-
-  <h2>
-    🔥 Trending Songs
-  </h2>
-
-  <div class="songs">
-
-    <div class="song">
-      <div class="song-number">#01</div>
-      <div class="song-icon">🎧</div>
-      <h3>Trending Now</h3>
-      <p>Popular Music</p>
-    </div>
-
-    <div class="song">
-      <div class="song-number">#02</div>
-      <div class="song-icon">🔥</div>
-      <h3>Hot Hits</h3>
-      <p>Top Songs</p>
-    </div>
-
-    <div class="song">
-      <div class="song-number">#03</div>
-      <div class="song-icon">🎶</div>
-      <h3>New Music</h3>
-      <p>Latest Songs</p>
-    </div>
-
-    <div class="song">
-      <div class="song-number">#04</div>
-      <div class="song-icon">⭐</div>
-      <h3>Fan Favourite</h3>
-      <p>Most Played</p>
-    </div>
-
-    <div class="song">
-      <div class="song-number">#05</div>
-      <div class="song-icon">💿</div>
-      <h3>Top Playlist</h3>
-      <p>Trending</p>
-    </div>
-
-    <div class="song">
-      <div class="song-number">#06</div>
-      <div class="song-icon">🎵</div>
-      <h3>Ekbal Picks</h3>
-      <p>Editor's Choice</p>
-    </div>
-
-  </div>
-
-</section>
 
 
 <footer>
   © 2026 Ekbal Playlist
 </footer>
-
-
-</div>
-
-
-<script>
-
-function loadPlaylist(){
-
-  const input =
-    document.getElementById("playlist")
-    .value.trim();
-
-  if(!input){
-
-    alert("पहले YouTube Playlist Link डालें");
-
-    return;
-  }
-
-  try{
-
-    const url = new URL(input);
-
-    const playlistId =
-      url.searchParams.get("list");
-
-    if(!playlistId){
-
-      alert("यह सही YouTube Playlist Link नहीं है");
-
-      return;
-    }
-
-    const embed =
-      "https://www.youtube.com/embed/" +
-      "?listType=playlist" +
-      "&list=" +
-      encodeURIComponent(playlistId) +
-      "&autoplay=1";
-
-    document.getElementById("youtube").src =
-      embed;
-
-    document.getElementById("player")
-      .style.display = "block";
-
-    document.getElementById("status")
-      .textContent = "● NOW PLAYING";
-
-  }
-
-  catch(error){
-
-    alert("कृपया सही YouTube Playlist Link डालें");
-
-  }
-
-}
-
-</script>
 
 </body>
 </html>
