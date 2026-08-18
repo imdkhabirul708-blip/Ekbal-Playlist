@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="hi">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,556 +7,417 @@
 <title>Ekbal Playlist</title>
 
 <style>
+
 *{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-}
-
-html,
-body{
-    width:100%;
-    min-height:100%;
+  box-sizing:border-box;
 }
 
 body{
-    background:#050505;
-    color:#fff;
-    font-family:Arial,Helvetica,sans-serif;
+  margin:0;
+  font-family:Arial,sans-serif;
+  color:white;
+  min-height:100vh;
+
+  background:
+    radial-gradient(circle at top right,#8b4f2530,transparent 35%),
+    linear-gradient(135deg,#050505,#21140b,#080808);
 }
 
-/* MAIN */
-
-.page{
-    min-height:100vh;
-    position:relative;
-    overflow:hidden;
-
-    background:
-        radial-gradient(
-            circle at 50% 35%,
-            rgba(155,108,31,.20),
-            transparent 35%
-        ),
-        #050505;
-}
-
-/* BACKGROUND PHOTO */
-
-.background{
-    position:absolute;
-    inset:0;
-
-    background-image:
-        linear-gradient(
-            rgba(0,0,0,.35),
-            rgba(0,0,0,.82)
-        ),
-        url("cover.jpg");
-
-    background-size:cover;
-    background-position:center;
-
-    filter:saturate(.9);
-
-    z-index:0;
-}
-
-/* DARK OVERLAY */
-
-.page::after{
-    content:"";
-    position:absolute;
-    inset:0;
-
-    background:
-        radial-gradient(
-            circle at center,
-            transparent 15%,
-            rgba(0,0,0,.55) 75%,
-            rgba(0,0,0,.9)
-        );
-
-    z-index:1;
-    pointer-events:none;
-}
-
-/* TOP BAR */
-
-.topbar{
-    position:relative;
-    z-index:10;
-
-    height:75px;
-
-    padding:0 30px;
-
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-
-    border-bottom:1px solid rgba(218,170,70,.22);
+header{
+  padding:22px;
+  text-align:center;
+  border-bottom:1px solid #ffffff15;
 }
 
 .logo{
-    color:#e7bd62;
-
-    font-size:18px;
-    font-weight:900;
-
-    letter-spacing:3px;
-
-    text-shadow:
-        0 0 12px rgba(218,170,70,.35);
+  font-size:25px;
+  font-weight:bold;
+  letter-spacing:3px;
 }
 
-.top-links{
-    display:flex;
-    gap:24px;
-
-    color:#d7b76b;
-
-    font-size:12px;
+.logo span{
+  color:#e7a65c;
 }
 
-/* CENTER */
-
-.content{
-    position:relative;
-    z-index:5;
-
-    min-height:
-        calc(100vh - 75px);
-
-    display:flex;
-    flex-direction:column;
-
-    align-items:center;
-    justify-content:center;
-
-    padding:45px 20px 150px;
+.container{
+  width:min(850px,92%);
+  margin:auto;
 }
 
-/* GOLD BRAND */
-
-.brand{
-    font-size:
-        clamp(48px,9vw,115px);
-
-    font-weight:900;
-
-    letter-spacing:
-        clamp(2px,1vw,8px);
-
-    text-transform:uppercase;
-
-    background:
-        linear-gradient(
-            180deg,
-            #fff0a5 0%,
-            #e4b650 30%,
-            #8c5c16 60%,
-            #efc45f 82%,
-            #70480c 100%
-        );
-
-    -webkit-background-clip:text;
-    background-clip:text;
-
-    color:transparent;
-
-    text-align:center;
-
-    text-shadow:
-        0 5px 0 rgba(55,34,4,.8),
-        0 12px 30px rgba(0,0,0,.9);
-
-    margin-bottom:5px;
+.hero{
+  text-align:center;
+  padding:45px 10px 30px;
 }
 
-.brand-sub{
-    color:#d2a84f;
-
-    font-size:11px;
-
-    letter-spacing:7px;
-
-    text-transform:uppercase;
-
-    margin-bottom:35px;
+.hero h1{
+  font-size:40px;
+  margin:10px 0;
 }
 
-/* VINYL */
-
-.vinyl{
-    width:270px;
-    height:270px;
-
-    border-radius:50%;
-
-    position:relative;
-
-    background:
-        repeating-radial-gradient(
-            circle,
-            #080808 0px,
-            #111 2px,
-            #050505 4px
-        );
-
-    box-shadow:
-        0 0 0 2px #1b1b1b,
-        0 25px 70px rgba(0,0,0,.9),
-        0 0 50px rgba(196,145,46,.15);
-
-    animation:spin 14s linear infinite;
-
-    margin-bottom:28px;
+.hero h1 span{
+  color:#e7a65c;
 }
 
-.vinyl::before{
-    content:"";
-
-    position:absolute;
-
-    width:85px;
-    height:85px;
-
-    left:50%;
-    top:50%;
-
-    transform:translate(-50%,-50%);
-
-    border-radius:50%;
-
-    background:
-        radial-gradient(
-            circle,
-            #f1c65d,
-            #9d6718 65%,
-            #4a2d07
-        );
-
-    box-shadow:
-        0 0 22px rgba(230,179,65,.45);
+.hero p{
+  color:#999;
 }
 
-.vinyl::after{
-    content:"";
-
-    position:absolute;
-
-    width:12px;
-    height:12px;
-
-    left:50%;
-    top:50%;
-
-    transform:translate(-50%,-50%);
-
-    border-radius:50%;
-
-    background:#050505;
-
-    z-index:2;
+.box{
+  background:#121212;
+  border:1px solid #ffffff15;
+  border-radius:22px;
+  padding:22px;
+  box-shadow:0 20px 60px #0009;
 }
 
-@keyframes spin{
-    from{
-        transform:rotate(0deg);
-    }
-
-    to{
-        transform:rotate(360deg);
-    }
+input{
+  width:100%;
+  padding:16px;
+  border-radius:12px;
+  border:1px solid #ffffff20;
+  background:#080808;
+  color:white;
+  font-size:15px;
+  outline:none;
 }
 
-/* WAVE */
-
-.wave{
-    position:absolute;
-
-    z-index:6;
-
-    display:flex;
-    align-items:center;
-
-    gap:4px;
-
-    margin-top:-55px;
+button{
+  width:100%;
+  margin-top:12px;
+  padding:15px;
+  border:0;
+  border-radius:12px;
+  background:#e7a65c;
+  color:#160d06;
+  font-size:16px;
+  font-weight:bold;
+  cursor:pointer;
 }
 
-.wave i{
-    display:block;
-
-    width:4px;
-
-    border-radius:10px;
-
-    background:
-        linear-gradient(
-            to bottom,
-            #ffe59a,
-            #a56b17
-        );
-
-    box-shadow:
-        0 0 8px rgba(224,173,66,.6);
+button:hover{
+  opacity:.9;
 }
 
-.wave i:nth-child(1){height:25px}
-.wave i:nth-child(2){height:45px}
-.wave i:nth-child(3){height:75px}
-.wave i:nth-child(4){height:40px}
-.wave i:nth-child(5){height:95px}
-.wave i:nth-child(6){height:55px}
-.wave i:nth-child(7){height:80px}
-.wave i:nth-child(8){height:110px}
-.wave i:nth-child(9){height:65px}
-.wave i:nth-child(10){height:90px}
-.wave i:nth-child(11){height:48px}
-.wave i:nth-child(12){height:72px}
-.wave i:nth-child(13){height:38px}
-
-/* YOUTUBE PLAYER */
+/* SIMPLE MUSIC PLAYER */
 
 .player{
-    width:
-        min(760px,94vw);
+  display:none;
+  margin-top:22px;
+  padding:25px;
+  text-align:center;
+  border-radius:20px;
 
-    padding:9px;
+  background:
+    linear-gradient(145deg,#24170d,#0d0d0d);
 
-    background:
-        linear-gradient(
-            135deg,
-            rgba(76,48,19,.97),
-            rgba(25,18,8,.98)
-        );
-
-    border:
-        1px solid
-        rgba(221,174,76,.4);
-
-    border-radius:32px;
-
-    box-shadow:
-        0 20px 70px rgba(0,0,0,.95),
-        inset 0 1px rgba(255,255,255,.08);
+  border:1px solid #e7a65c25;
 }
 
-.player iframe{
-    display:block;
+.music-icon{
+  width:110px;
+  height:110px;
+  margin:auto;
 
-    width:100%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
 
-    height:105px;
+  border-radius:25px;
 
-    border:0;
+  background:
+    linear-gradient(135deg,#6f3b19,#15100c);
 
-    border-radius:25px;
+  font-size:48px;
 
-    background:#000;
+  box-shadow:0 15px 35px #000b;
 }
 
-/* LABEL */
-
-.now-playing{
-    margin-top:12px;
-
-    color:#d8ad50;
-
-    font-size:10px;
-
-    letter-spacing:4px;
-
-    text-align:center;
-
-    opacity:.9;
+.player h2{
+  margin:18px 0 5px;
 }
 
-/* MOBILE */
-
-@media(max-width:700px){
-
-    .topbar{
-        height:62px;
-        padding:0 16px;
-    }
-
-    .logo{
-        font-size:14px;
-        letter-spacing:2px;
-    }
-
-    .top-links{
-        gap:10px;
-        font-size:9px;
-    }
-
-    .content{
-        min-height:
-            calc(100vh - 62px);
-
-        padding:
-            35px 12px 115px;
-    }
-
-    .brand{
-        font-size:15vw;
-
-        letter-spacing:2px;
-    }
-
-    .brand-sub{
-        font-size:8px;
-        letter-spacing:4px;
-
-        margin-bottom:25px;
-    }
-
-    .vinyl{
-        width:205px;
-        height:205px;
-
-        margin-bottom:25px;
-    }
-
-    .vinyl::before{
-        width:65px;
-        height:65px;
-    }
-
-    .wave{
-        margin-top:-45px;
-
-        transform:scale(.75);
-    }
-
-    .player{
-        width:96vw;
-
-        padding:6px;
-
-        border-radius:24px;
-    }
-
-    .player iframe{
-        height:92px;
-
-        border-radius:19px;
-    }
-
-    .now-playing{
-        font-size:8px;
-        letter-spacing:3px;
-    }
+.player p{
+  color:#888;
+  font-size:13px;
 }
 
-/* VERY SMALL SCREEN */
-
-@media(max-width:380px){
-
-    .top-links{
-        display:none;
-    }
-
-    .brand{
-        font-size:16vw;
-    }
-
-    .vinyl{
-        width:180px;
-        height:180px;
-    }
-
-    .player iframe{
-        height:85px;
-    }
+.play-status{
+  margin-top:18px;
+  color:#e7a65c;
+  font-size:13px;
 }
+
+/* TRENDING */
+
+.trending{
+  margin-top:35px;
+}
+
+.trending h2{
+  font-size:22px;
+}
+
+.songs{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:12px;
+}
+
+.song{
+  padding:18px;
+  border-radius:16px;
+  background:#111;
+  border:1px solid #ffffff10;
+}
+
+.song-number{
+  color:#e7a65c;
+  font-size:12px;
+}
+
+.song-icon{
+  margin:12px 0;
+  font-size:25px;
+}
+
+.song h3{
+  margin:0;
+  font-size:14px;
+}
+
+.song p{
+  color:#666;
+  font-size:11px;
+}
+
+footer{
+  text-align:center;
+  color:#555;
+  padding:35px;
+  font-size:12px;
+}
+
+/* HIDDEN YOUTUBE */
+
+#youtube{
+  position:absolute;
+  width:1px;
+  height:1px;
+  left:-9999px;
+  top:-9999px;
+  opacity:0;
+}
+
+@media(max-width:600px){
+
+  .hero h1{
+    font-size:32px;
+  }
+
+  .songs{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+}
+
 </style>
 </head>
 
-
 <body>
 
-<div class="page">
+<header>
 
-    <!-- BACKGROUND -->
-    <div class="background"></div>
+  <div class="logo">
+    EKBAL <span>PLAYLIST</span>
+  </div>
 
-
-    <!-- TOP -->
-    <header class="topbar">
-
-        <div class="logo">
-            EKBAL PLAYLIST
-        </div>
-
-        <div class="top-links">
-            <span>♫ MUSIC</span>
-            <span>▶ YOUTUBE</span>
-        </div>
-
-    </header>
+</header>
 
 
-    <!-- CONTENT -->
-    <main class="content">
-
-        <!-- BRAND -->
-        <div class="brand">
-            EKBAL
-        </div>
-
-        <div class="brand-sub">
-            PLAYLIST
-        </div>
+<div class="container">
 
 
-        <!-- VINYL -->
-        <div class="vinyl"></div>
+<section class="hero">
+
+  <h1>
+    Feel the <span>Music.</span>
+  </h1>
+
+  <p>
+    YouTube Playlist यहाँ डालकर सुनें
+  </p>
+
+</section>
 
 
-        <!-- WAVEFORM -->
-        <div class="wave">
+<div class="box">
 
-            <i></i>
-            <i></i>
-            <i></i>
-            <i></i>
-            <i></i>
-            <i></i>
-            <i></i>
-            <i></i>
-            <i></i>
-            <i></i>
-            <i></i>
-            <i></i>
-            <i></i>
+  <input
+    id="playlist"
+    type="text"
+    placeholder="YouTube Playlist Link यहाँ डालें..."
+  >
 
-        </div>
+  <button onclick="loadPlaylist()">
+    ▶ Play Playlist
+  </button>
 
 
-        <!-- YOUTUBE PLAYLIST -->
-        <section class="player">
+  <div
+    class="player"
+    id="player">
 
-            <iframe
-                src="https://www.youtube.com/embed?listType=playlist&list=PLFtitMDpwfKY"
-                title="Ekbal Playlist"
-                allow="autoplay; encrypted-media; picture-in-picture; web-share"
-                allowfullscreen>
-            </iframe>
+    <div class="music-icon">
+      🎵
+    </div>
 
-        </section>
+    <h2>
+      Ekbal Playlist
+    </h2>
+
+    <p>
+      Your playlist is playing
+    </p>
+
+    <div
+      class="play-status"
+      id="status">
+
+      ● NOW PLAYING
+
+    </div>
+
+  </div>
 
 
-        <div class="now-playing">
-            NOW PLAYING • EKBAL PLAYLIST
-        </div>
+  <iframe
+    id="youtube"
+    allow="autoplay; encrypted-media">
+  </iframe>
 
-    </main>
 
 </div>
+
+
+<section class="trending">
+
+  <h2>
+    🔥 Trending Songs
+  </h2>
+
+  <div class="songs">
+
+    <div class="song">
+      <div class="song-number">#01</div>
+      <div class="song-icon">🎧</div>
+      <h3>Trending Now</h3>
+      <p>Popular Music</p>
+    </div>
+
+    <div class="song">
+      <div class="song-number">#02</div>
+      <div class="song-icon">🔥</div>
+      <h3>Hot Hits</h3>
+      <p>Top Songs</p>
+    </div>
+
+    <div class="song">
+      <div class="song-number">#03</div>
+      <div class="song-icon">🎶</div>
+      <h3>New Music</h3>
+      <p>Latest Songs</p>
+    </div>
+
+    <div class="song">
+      <div class="song-number">#04</div>
+      <div class="song-icon">⭐</div>
+      <h3>Fan Favourite</h3>
+      <p>Most Played</p>
+    </div>
+
+    <div class="song">
+      <div class="song-number">#05</div>
+      <div class="song-icon">💿</div>
+      <h3>Top Playlist</h3>
+      <p>Trending</p>
+    </div>
+
+    <div class="song">
+      <div class="song-number">#06</div>
+      <div class="song-icon">🎵</div>
+      <h3>Ekbal Picks</h3>
+      <p>Editor's Choice</p>
+    </div>
+
+  </div>
+
+</section>
+
+
+<footer>
+  © 2026 Ekbal Playlist
+</footer>
+
+
+</div>
+
+
+<script>
+
+function loadPlaylist(){
+
+  const input =
+    document.getElementById("playlist")
+    .value.trim();
+
+  if(!input){
+
+    alert("पहले YouTube Playlist Link डालें");
+
+    return;
+  }
+
+  try{
+
+    const url = new URL(input);
+
+    const playlistId =
+      url.searchParams.get("list");
+
+    if(!playlistId){
+
+      alert("यह सही YouTube Playlist Link नहीं है");
+
+      return;
+    }
+
+    const embed =
+      "https://www.youtube.com/embed/" +
+      "?listType=playlist" +
+      "&list=" +
+      encodeURIComponent(playlistId) +
+      "&autoplay=1";
+
+    document.getElementById("youtube").src =
+      embed;
+
+    document.getElementById("player")
+      .style.display = "block";
+
+    document.getElementById("status")
+      .textContent = "● NOW PLAYING";
+
+  }
+
+  catch(error){
+
+    alert("कृपया सही YouTube Playlist Link डालें");
+
+  }
+
+}
+
+</script>
 
 </body>
 </html>
