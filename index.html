@@ -1,530 +1,686 @@
 <!DOCTYPE html>
-<html lang="hi">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Ekbal Playlist</title>
 
 <style>
 *{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html,body{
+    width:100%;
+    height:100%;
 }
 
 body{
-  background:#111;
-  color:#fff;
-  font-family:Arial,sans-serif;
+    background:#050505;
+    color:#fff;
+    font-family:Arial,Helvetica,sans-serif;
+    overflow:hidden;
 }
+
+/* =========================
+   MAIN SCREEN
+========================= */
 
 .hero{
-  position:relative;
-  width:100%;
-  min-height:100vh;
-  overflow:hidden;
-  background:#222;
+    position:relative;
+    width:100%;
+    height:100vh;
+    overflow:hidden;
+
+    background:
+        radial-gradient(
+            circle at 50% 40%,
+            #3b2817 0%,
+            #15100b 35%,
+            #050505 75%
+        );
 }
 
-.background{
-  position:absolute;
-  inset:0;
-  background-size:cover;
-  background-position:center;
-  transition:.3s;
+/* Golden glow */
+
+.hero::before{
+    content:"";
+    position:absolute;
+    width:700px;
+    height:700px;
+
+    left:50%;
+    top:45%;
+
+    transform:translate(-50%,-50%);
+
+    background:radial-gradient(
+        circle,
+        rgba(212,166,72,.22),
+        rgba(0,0,0,0) 68%
+    );
+
+    pointer-events:none;
 }
 
-.overlay{
-  position:absolute;
-  inset:0;
-  background:linear-gradient(
-    to bottom,
-    rgba(0,0,0,.15),
-    rgba(0,0,0,.2) 45%,
-    rgba(0,0,0,.8)
-  );
-}
+
+/* =========================
+   TOP BAR
+========================= */
 
 .topbar{
-  position:absolute;
-  z-index:5;
-  top:20px;
-  left:20px;
-  right:20px;
-  display:flex;
-  justify-content:space-between;
-  font-size:14px;
+    position:absolute;
+
+    top:22px;
+    left:28px;
+    right:28px;
+
+    z-index:20;
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
 }
 
-.main-title{
-  position:absolute;
-  z-index:4;
-  top:18%;
-  left:50%;
-  transform:translateX(-50%);
-  width:95%;
-  text-align:center;
-  font-size:clamp(55px,11vw,150px);
-  line-height:.85;
-  font-weight:900;
-  text-shadow:0 5px 20px #000;
+.brand{
+    color:#e4b75c;
+
+    font-size:18px;
+    font-weight:900;
+
+    letter-spacing:3px;
+
+    text-shadow:
+        0 0 10px rgba(228,183,92,.5);
 }
 
-.main-title span{
-  display:block;
-}
+.top-right{
+    display:flex;
+    gap:20px;
 
-.player{
-  position:absolute;
-  z-index:6;
-  bottom:30px;
-  left:50%;
-  transform:translateX(-50%);
-  width:min(760px,94%);
-  min-height:110px;
-  padding:15px 20px;
-  border-radius:60px;
-  display:flex;
-  align-items:center;
-  gap:18px;
-  background:rgba(85,45,35,.94);
-  box-shadow:0 15px 40px #000;
-}
+    color:#c9a85e;
 
-.cover{
-  width:78px;
-  height:78px;
-  flex-shrink:0;
-  border-radius:50%;
-  overflow:hidden;
-  background:#333;
-}
-
-.cover img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-}
-
-.info{
-  flex:1;
-  min-width:0;
-}
-
-.song-name{
-  font-size:16px;
-  font-weight:bold;
-  white-space:nowrap;
-  overflow:hidden;
-  text-overflow:ellipsis;
-}
-
-.artist{
-  color:#ddd;
-  font-size:12px;
-  margin-top:5px;
-}
-
-.progress{
-  width:100%;
-  height:4px;
-  margin-top:13px;
-  background:#ffffff45;
-  border-radius:10px;
-  overflow:hidden;
-}
-
-.progress-bar{
-  width:0%;
-  height:100%;
-  background:white;
-}
-
-.controls{
-  display:flex;
-  align-items:center;
-  gap:15px;
-}
-
-.controls button{
-  border:0;
-  background:transparent;
-  color:white;
-  cursor:pointer;
-  font-size:18px;
-}
-
-.play{
-  width:50px;
-  height:50px;
-  border-radius:50%;
-  background:white!important;
-  color:#6b3328!important;
-  font-size:18px!important;
-}
-
-.upload-area{
-  position:absolute;
-  z-index:10;
-  left:50%;
-  top:58%;
-  transform:translate(-50%,-50%);
-  display:flex;
-  gap:10px;
-}
-
-.upload{
-  background:rgba(0,0,0,.7);
-  border:1px solid #fff5;
-  color:white;
-  padding:11px 16px;
-  border-radius:25px;
-  cursor:pointer;
-  font-size:13px;
-  backdrop-filter:blur(8px);
-}
-
-.upload:hover{
-  background:#fff;
-  color:#111;
-}
-
-input[type=file]{
-  display:none;
-}
-
-@media(max-width:650px){
-
-  .player{
-    width:95%;
-    min-height:90px;
-    padding:10px 13px;
-    gap:10px;
-  }
-
-  .cover{
-    width:58px;
-    height:58px;
-  }
-
-  .song-name{
-    font-size:12px;
-  }
-
-  .artist{
-    font-size:10px;
-  }
-
-  .controls{
-    gap:7px;
-  }
-
-  .controls button{
     font-size:13px;
-  }
-
-  .play{
-    width:40px;
-    height:40px;
-  }
-
-  .upload-area{
-    top:55%;
-    flex-direction:column;
-    width:160px;
-  }
-
-  .upload{
-    text-align:center;
-  }
 }
+
+.top-item{
+    display:flex;
+    align-items:center;
+    gap:6px;
+}
+
+
+/* =========================
+   CENTER LOGO
+========================= */
+
+.center{
+    position:absolute;
+
+    z-index:10;
+
+    top:50%;
+    left:50%;
+
+    transform:translate(-50%,-50%);
+
+    width:100%;
+
+    text-align:center;
+}
+
+.logo{
+    font-size:clamp(48px,9vw,130px);
+
+    font-weight:1000;
+
+    letter-spacing:5px;
+
+    text-transform:uppercase;
+
+    background:
+        linear-gradient(
+            180deg,
+            #fff3b0 0%,
+            #e9bb55 30%,
+            #9b6819 60%,
+            #f5cf70 80%,
+            #76500e 100%
+        );
+
+    -webkit-background-clip:text;
+    background-clip:text;
+
+    color:transparent;
+
+    filter:
+        drop-shadow(0 4px 0 #4b3008)
+        drop-shadow(0 10px 25px rgba(0,0,0,.9));
+}
+
+.subtitle{
+    margin-top:8px;
+
+    color:#c99b3c;
+
+    font-size:13px;
+
+    letter-spacing:8px;
+
+    text-transform:uppercase;
+}
+
+
+/* =========================
+   VINYL
+========================= */
+
+.vinyl{
+    position:absolute;
+
+    z-index:4;
+
+    left:50%;
+    top:50%;
+
+    transform:
+        translate(-50%,-50%)
+        translateY(90px);
+
+    width:300px;
+    height:300px;
+
+    border-radius:50%;
+
+    background:
+        repeating-radial-gradient(
+            circle,
+            #090909 0px,
+            #111 2px,
+            #050505 4px
+        );
+
+    box-shadow:
+        0 0 0 3px #171717,
+        0 0 40px rgba(218,164,48,.18),
+        0 30px 80px #000;
+
+    opacity:.82;
+}
+
+.vinyl::after{
+    content:"";
+
+    position:absolute;
+
+    width:72px;
+    height:72px;
+
+    left:50%;
+    top:50%;
+
+    transform:translate(-50%,-50%);
+
+    border-radius:50%;
+
+    background:
+        radial-gradient(
+            circle,
+            #f2c35b 0%,
+            #a76c18 55%,
+            #4a2d08 100%
+        );
+
+    box-shadow:
+        0 0 20px rgba(221,169,58,.5);
+}
+
+.vinyl::before{
+    content:"";
+
+    position:absolute;
+
+    width:12px;
+    height:12px;
+
+    left:50%;
+    top:50%;
+
+    transform:translate(-50%,-50%);
+
+    z-index:3;
+
+    border-radius:50%;
+
+    background:#050505;
+}
+
+
+/* =========================
+   WAVEFORM
+========================= */
+
+.wave{
+    position:absolute;
+
+    z-index:7;
+
+    left:50%;
+    top:50%;
+
+    transform:
+        translate(-50%,-50%)
+        translateY(-5px);
+
+    display:flex;
+
+    align-items:center;
+
+    gap:5px;
+
+    height:120px;
+}
+
+.wave span{
+    width:4px;
+
+    border-radius:10px;
+
+    background:
+        linear-gradient(
+            to bottom,
+            #ffe08a,
+            #a76b19
+        );
+
+    box-shadow:
+        0 0 8px rgba(231,181,78,.55);
+}
+
+.wave span:nth-child(1){height:30px}
+.wave span:nth-child(2){height:55px}
+.wave span:nth-child(3){height:85px}
+.wave span:nth-child(4){height:45px}
+.wave span:nth-child(5){height:105px}
+.wave span:nth-child(6){height:65px}
+.wave span:nth-child(7){height:90px}
+.wave span:nth-child(8){height:45px}
+.wave span:nth-child(9){height:115px}
+.wave span:nth-child(10){height:70px}
+.wave span:nth-child(11){height:95px}
+.wave span:nth-child(12){height:50px}
+.wave span:nth-child(13){height:80px}
+.wave span:nth-child(14){height:40px}
+
+
+/* =========================
+   YOUTUBE PLAYER
+========================= */
+
+.youtube-box{
+    position:absolute;
+
+    z-index:30;
+
+    left:50%;
+    bottom:28px;
+
+    transform:translateX(-50%);
+
+    width:min(760px,92%);
+
+    height:105px;
+
+    padding:10px;
+
+    border-radius:60px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(77,48,20,.97),
+            rgba(29,20,9,.98)
+        );
+
+    border:1px solid rgba(218,173,82,.35);
+
+    box-shadow:
+        0 20px 60px rgba(0,0,0,.9),
+        inset 0 1px rgba(255,255,255,.08);
+}
+
+.youtube-frame{
+    width:100%;
+    height:100%;
+
+    border:0;
+
+    border-radius:50px;
+}
+
+
+/* =========================
+   MUSIC BUTTON
+========================= */
+
+.music-button{
+    position:absolute;
+
+    z-index:40;
+
+    left:50%;
+    bottom:145px;
+
+    transform:translateX(-50%);
+
+    padding:10px 22px;
+
+    border-radius:30px;
+
+    color:#f1c966;
+
+    background:rgba(0,0,0,.65);
+
+    border:1px solid rgba(220,173,73,.45);
+
+    font-size:12px;
+
+    letter-spacing:2px;
+}
+
+
+/* =========================
+   DECORATION
+========================= */
+
+.gold-line{
+    position:absolute;
+
+    left:50%;
+    bottom:155px;
+
+    transform:translateX(-50%);
+
+    width:170px;
+    height:1px;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            #d5a844,
+            transparent
+        );
+
+    opacity:.7;
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media(max-width:700px){
+
+    .topbar{
+        top:15px;
+        left:15px;
+        right:15px;
+    }
+
+    .brand{
+        font-size:14px;
+        letter-spacing:2px;
+    }
+
+    .top-right{
+        gap:10px;
+        font-size:10px;
+    }
+
+    .logo{
+        font-size:15vw;
+        letter-spacing:2px;
+    }
+
+    .subtitle{
+        font-size:9px;
+        letter-spacing:4px;
+    }
+
+    .vinyl{
+        width:230px;
+        height:230px;
+
+        transform:
+            translate(-50%,-50%)
+            translateY(75px);
+    }
+
+    .wave{
+        transform:
+            translate(-50%,-50%)
+            translateY(-5px)
+            scale(.7);
+    }
+
+    .youtube-box{
+        width:94%;
+        height:90px;
+
+        bottom:15px;
+
+        border-radius:50px;
+
+        padding:7px;
+    }
+
+    .youtube-frame{
+        border-radius:43px;
+    }
+
+    .music-button{
+        bottom:118px;
+
+        font-size:10px;
+
+        padding:8px 16px;
+    }
+
+    .gold-line{
+        bottom:132px;
+    }
+}
+
+
+/* =========================
+   SMALL MOBILE
+========================= */
+
+@media(max-width:400px){
+
+    .logo{
+        font-size:17vw;
+    }
+
+    .vinyl{
+        width:190px;
+        height:190px;
+    }
+
+    .youtube-box{
+        height:82px;
+    }
+
+    .top-right{
+        display:none;
+    }
+}
+
 </style>
 </head>
+
 
 <body>
 
 <div class="hero">
 
-  <div
-    class="background"
-    id="background"
-  ></div>
 
-  <div class="overlay"></div>
+    <!-- TOP BAR -->
 
+    <div class="topbar">
 
-  <div class="topbar">
-    <span>🎵 EKBAL</span>
-    <span>YT Music</span>
-  </div>
+        <div class="brand">
+            EKBAL PLAYLIST
+        </div>
 
+        <div class="top-right">
 
-  <div class="main-title">
-    <span>दिल से</span>
-    <span>सुकून</span>
-  </div>
+            <div class="top-item">
+                🎵 Music
+            </div>
 
+            <div class="top-item">
+                ▶ YouTube
+            </div>
 
-  <!-- IMAGE + SONG UPLOAD -->
-
-  <div class="upload-area">
-
-    <label class="upload">
-      🖼️ अपनी Image चुनें
-      <input
-        type="file"
-        id="imageInput"
-        accept="image/*"
-      >
-    </label>
-
-    <label class="upload">
-      🎵 अपना Song चुनें
-      <input
-        type="file"
-        id="songInput"
-        accept="audio/*"
-      >
-    </label>
-
-  </div>
-
-
-  <!-- PLAYER -->
-
-  <div class="player">
-
-    <div class="cover">
-      <img
-        id="coverImage"
-        alt="Cover"
-      >
-    </div>
-
-
-    <div class="info">
-
-      <div
-        class="song-name"
-        id="songName"
-      >
-        अपना Song चुनें
-      </div>
-
-      <div
-        class="artist"
-        id="artist"
-      >
-        Ekbal Music
-      </div>
-
-      <div class="progress">
-        <div
-          class="progress-bar"
-          id="progressBar"
-        ></div>
-      </div>
+        </div>
 
     </div>
 
 
-    <div class="controls">
 
-      <button id="previous">
-        ⏮
-      </button>
+    <!-- CENTER -->
 
-      <button
-        class="play"
-        id="play"
-      >
-        ▶
-      </button>
+    <div class="center">
 
-      <button id="next">
-        ⏭
-      </button>
+        <div class="logo">
+            EKBAL
+        </div>
+
+        <div class="subtitle">
+            PLAYLIST
+        </div>
 
     </div>
 
-  </div>
+
+
+    <!-- VINYL -->
+
+    <div class="vinyl"></div>
+
+
+
+    <!-- AUDIO WAVE -->
+
+    <div class="wave">
+
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+
+    </div>
+
+
+
+    <!-- GOLD LINE -->
+
+    <div class="gold-line"></div>
+
+
+
+    <!-- LABEL -->
+
+    <div class="music-button">
+        NOW PLAYING • EKBAL PLAYLIST
+    </div>
+
+
+
+    <!-- YOUTUBE PLAYLIST -->
+
+    <div class="youtube-box">
+
+        <iframe
+            class="youtube-frame"
+            src="https://www.youtube.com/embed?listType=playlist&list=PLFtitMDpwfKY"
+            title="Ekbal Playlist"
+            allow="
+                autoplay;
+                encrypted-media;
+                picture-in-picture;
+                web-share
+            "
+            allowfullscreen>
+        </iframe>
+
+    </div>
+
 
 </div>
 
 
-<audio id="audio"></audio>
-
-
 <script>
 
-const imageInput =
-  document.getElementById("imageInput");
+/* =========================
+   SIMPLE GOLD GLOW ANIMATION
+========================= */
 
-const songInput =
-  document.getElementById("songInput");
+const vinyl =
+    document.querySelector(".vinyl");
 
-const background =
-  document.getElementById("background");
+let angle = 0;
 
-const coverImage =
-  document.getElementById("coverImage");
+function animateVinyl(){
 
-const audio =
-  document.getElementById("audio");
+    angle += 0.08;
 
-const play =
-  document.getElementById("play");
+    vinyl.style.transform =
+        `translate(-50%,-50%)
+         translateY(90px)
+         rotate(${angle}deg)`;
 
-const songName =
-  document.getElementById("songName");
+    requestAnimationFrame(animateVinyl);
+}
 
-const progressBar =
-  document.getElementById("progressBar");
-
-
-/* IMAGE SELECT */
-
-imageInput.addEventListener(
-  "change",
-  function(){
-
-    const file = this.files[0];
-
-    if(!file) return;
-
-    const imageURL =
-      URL.createObjectURL(file);
-
-    background.style.backgroundImage =
-      `url("${imageURL}")`;
-
-    coverImage.src =
-      imageURL;
-
-  }
-);
+if(window.innerWidth > 700){
+    animateVinyl();
+}
 
 
-/* SONG SELECT */
+/* Mobile rotation */
 
-songInput.addEventListener(
-  "change",
-  function(){
+if(window.innerWidth <= 700){
 
-    const file = this.files[0];
+    function mobileVinyl(){
 
-    if(!file) return;
+        angle += 0.05;
 
-    const songURL =
-      URL.createObjectURL(file);
+        vinyl.style.transform =
+            `translate(-50%,-50%)
+             translateY(75px)
+             rotate(${angle}deg)`;
 
-    audio.src =
-      songURL;
-
-    songName.textContent =
-      file.name.replace(/\.[^/.]+$/,"");
-
-    play.textContent =
-      "▶";
-
-  }
-);
-
-
-/* PLAY / PAUSE */
-
-play.addEventListener(
-  "click",
-  function(){
-
-    if(!audio.src){
-
-      alert(
-        "पहले अपना Song चुनें"
-      );
-
-      return;
+        requestAnimationFrame(mobileVinyl);
     }
 
-    if(audio.paused){
-
-      audio.play();
-
-      play.textContent =
-        "❚❚";
-
-    }else{
-
-      audio.pause();
-
-      play.textContent =
-        "▶";
-
-    }
-
-  }
-);
-
-
-/* PROGRESS */
-
-audio.addEventListener(
-  "timeupdate",
-  function(){
-
-    if(!audio.duration) return;
-
-    const percent =
-      (audio.currentTime /
-       audio.duration) * 100;
-
-    progressBar.style.width =
-      percent + "%";
-
-  }
-);
-
-
-/* SONG END */
-
-audio.addEventListener(
-  "ended",
-  function(){
-
-    play.textContent =
-      "▶";
-
-    progressBar.style.width =
-      "0%";
-
-  }
-);
-
-
-/* PREVIOUS */
-
-document
-.getElementById("previous")
-.addEventListener("click",function(){
-
-  audio.currentTime = 0;
-
-});
-
-
-/* NEXT */
-
-document
-.getElementById("next")
-.addEventListener("click",function(){
-
-  audio.currentTime = 0;
-
-  if(audio.src){
-    audio.play();
-  }
-
-});
+    mobileVinyl();
+}
 
 </script>
 
