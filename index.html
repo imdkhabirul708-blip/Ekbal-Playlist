@@ -13,80 +13,93 @@
     box-sizing:border-box;
 }
 
-html,body{
+html,
+body{
     width:100%;
-    height:100%;
+    min-height:100%;
 }
 
 body{
     background:#050505;
     color:#fff;
     font-family:Arial,Helvetica,sans-serif;
-    overflow:hidden;
 }
 
-/* =========================
-   MAIN SCREEN
-========================= */
+/* MAIN */
 
-.hero{
+.page{
+    min-height:100vh;
     position:relative;
-    width:100%;
-    height:100vh;
     overflow:hidden;
 
     background:
         radial-gradient(
-            circle at 50% 40%,
-            #3b2817 0%,
-            #15100b 35%,
-            #050505 75%
-        );
+            circle at 50% 35%,
+            rgba(155,108,31,.20),
+            transparent 35%
+        ),
+        #050505;
 }
 
-/* Golden glow */
+/* BACKGROUND PHOTO */
 
-.hero::before{
+.background{
+    position:absolute;
+    inset:0;
+
+    background-image:
+        linear-gradient(
+            rgba(0,0,0,.35),
+            rgba(0,0,0,.82)
+        ),
+        url("cover.jpg");
+
+    background-size:cover;
+    background-position:center;
+
+    filter:saturate(.9);
+
+    z-index:0;
+}
+
+/* DARK OVERLAY */
+
+.page::after{
     content:"";
     position:absolute;
-    width:700px;
-    height:700px;
+    inset:0;
 
-    left:50%;
-    top:45%;
+    background:
+        radial-gradient(
+            circle at center,
+            transparent 15%,
+            rgba(0,0,0,.55) 75%,
+            rgba(0,0,0,.9)
+        );
 
-    transform:translate(-50%,-50%);
-
-    background:radial-gradient(
-        circle,
-        rgba(212,166,72,.22),
-        rgba(0,0,0,0) 68%
-    );
-
+    z-index:1;
     pointer-events:none;
 }
 
-
-/* =========================
-   TOP BAR
-========================= */
+/* TOP BAR */
 
 .topbar{
-    position:absolute;
+    position:relative;
+    z-index:10;
 
-    top:22px;
-    left:28px;
-    right:28px;
+    height:75px;
 
-    z-index:20;
+    padding:0 30px;
 
     display:flex;
-    justify-content:space-between;
     align-items:center;
+    justify-content:space-between;
+
+    border-bottom:1px solid rgba(218,170,70,.22);
 }
 
-.brand{
-    color:#e4b75c;
+.logo{
+    color:#e7bd62;
 
     font-size:18px;
     font-weight:900;
@@ -94,61 +107,57 @@ body{
     letter-spacing:3px;
 
     text-shadow:
-        0 0 10px rgba(228,183,92,.5);
+        0 0 12px rgba(218,170,70,.35);
 }
 
-.top-right{
+.top-links{
     display:flex;
-    gap:20px;
+    gap:24px;
 
-    color:#c9a85e;
+    color:#d7b76b;
 
-    font-size:13px;
+    font-size:12px;
 }
 
-.top-item{
+/* CENTER */
+
+.content{
+    position:relative;
+    z-index:5;
+
+    min-height:
+        calc(100vh - 75px);
+
     display:flex;
+    flex-direction:column;
+
     align-items:center;
-    gap:6px;
+    justify-content:center;
+
+    padding:45px 20px 150px;
 }
 
+/* GOLD BRAND */
 
-/* =========================
-   CENTER LOGO
-========================= */
+.brand{
+    font-size:
+        clamp(48px,9vw,115px);
 
-.center{
-    position:absolute;
+    font-weight:900;
 
-    z-index:10;
-
-    top:50%;
-    left:50%;
-
-    transform:translate(-50%,-50%);
-
-    width:100%;
-
-    text-align:center;
-}
-
-.logo{
-    font-size:clamp(48px,9vw,130px);
-
-    font-weight:1000;
-
-    letter-spacing:5px;
+    letter-spacing:
+        clamp(2px,1vw,8px);
 
     text-transform:uppercase;
 
     background:
         linear-gradient(
             180deg,
-            #fff3b0 0%,
-            #e9bb55 30%,
-            #9b6819 60%,
-            #f5cf70 80%,
-            #76500e 100%
+            #fff0a5 0%,
+            #e4b650 30%,
+            #8c5c16 60%,
+            #efc45f 82%,
+            #70480c 100%
         );
 
     -webkit-background-clip:text;
@@ -156,68 +165,62 @@ body{
 
     color:transparent;
 
-    filter:
-        drop-shadow(0 4px 0 #4b3008)
-        drop-shadow(0 10px 25px rgba(0,0,0,.9));
+    text-align:center;
+
+    text-shadow:
+        0 5px 0 rgba(55,34,4,.8),
+        0 12px 30px rgba(0,0,0,.9);
+
+    margin-bottom:5px;
 }
 
-.subtitle{
-    margin-top:8px;
+.brand-sub{
+    color:#d2a84f;
 
-    color:#c99b3c;
+    font-size:11px;
 
-    font-size:13px;
-
-    letter-spacing:8px;
+    letter-spacing:7px;
 
     text-transform:uppercase;
+
+    margin-bottom:35px;
 }
 
-
-/* =========================
-   VINYL
-========================= */
+/* VINYL */
 
 .vinyl{
-    position:absolute;
-
-    z-index:4;
-
-    left:50%;
-    top:50%;
-
-    transform:
-        translate(-50%,-50%)
-        translateY(90px);
-
-    width:300px;
-    height:300px;
+    width:270px;
+    height:270px;
 
     border-radius:50%;
+
+    position:relative;
 
     background:
         repeating-radial-gradient(
             circle,
-            #090909 0px,
+            #080808 0px,
             #111 2px,
             #050505 4px
         );
 
     box-shadow:
-        0 0 0 3px #171717,
-        0 0 40px rgba(218,164,48,.18),
-        0 30px 80px #000;
+        0 0 0 2px #1b1b1b,
+        0 25px 70px rgba(0,0,0,.9),
+        0 0 50px rgba(196,145,46,.15);
 
-    opacity:.82;
+    animation:spin 14s linear infinite;
+
+    margin-bottom:28px;
 }
 
-.vinyl::after{
+.vinyl::before{
     content:"";
 
     position:absolute;
 
-    width:72px;
-    height:72px;
+    width:85px;
+    height:85px;
 
     left:50%;
     top:50%;
@@ -229,16 +232,16 @@ body{
     background:
         radial-gradient(
             circle,
-            #f2c35b 0%,
-            #a76c18 55%,
-            #4a2d08 100%
+            #f1c65d,
+            #9d6718 65%,
+            #4a2d07
         );
 
     box-shadow:
-        0 0 20px rgba(221,169,58,.5);
+        0 0 22px rgba(230,179,65,.45);
 }
 
-.vinyl::before{
+.vinyl::after{
     content:"";
 
     position:absolute;
@@ -251,40 +254,41 @@ body{
 
     transform:translate(-50%,-50%);
 
-    z-index:3;
-
     border-radius:50%;
 
     background:#050505;
+
+    z-index:2;
 }
 
+@keyframes spin{
+    from{
+        transform:rotate(0deg);
+    }
 
-/* =========================
-   WAVEFORM
-========================= */
+    to{
+        transform:rotate(360deg);
+    }
+}
+
+/* WAVE */
 
 .wave{
     position:absolute;
 
-    z-index:7;
-
-    left:50%;
-    top:50%;
-
-    transform:
-        translate(-50%,-50%)
-        translateY(-5px);
+    z-index:6;
 
     display:flex;
-
     align-items:center;
 
-    gap:5px;
+    gap:4px;
 
-    height:120px;
+    margin-top:-55px;
 }
 
-.wave span{
+.wave i{
+    display:block;
+
     width:4px;
 
     border-radius:10px;
@@ -292,397 +296,267 @@ body{
     background:
         linear-gradient(
             to bottom,
-            #ffe08a,
-            #a76b19
+            #ffe59a,
+            #a56b17
         );
 
     box-shadow:
-        0 0 8px rgba(231,181,78,.55);
+        0 0 8px rgba(224,173,66,.6);
 }
 
-.wave span:nth-child(1){height:30px}
-.wave span:nth-child(2){height:55px}
-.wave span:nth-child(3){height:85px}
-.wave span:nth-child(4){height:45px}
-.wave span:nth-child(5){height:105px}
-.wave span:nth-child(6){height:65px}
-.wave span:nth-child(7){height:90px}
-.wave span:nth-child(8){height:45px}
-.wave span:nth-child(9){height:115px}
-.wave span:nth-child(10){height:70px}
-.wave span:nth-child(11){height:95px}
-.wave span:nth-child(12){height:50px}
-.wave span:nth-child(13){height:80px}
-.wave span:nth-child(14){height:40px}
+.wave i:nth-child(1){height:25px}
+.wave i:nth-child(2){height:45px}
+.wave i:nth-child(3){height:75px}
+.wave i:nth-child(4){height:40px}
+.wave i:nth-child(5){height:95px}
+.wave i:nth-child(6){height:55px}
+.wave i:nth-child(7){height:80px}
+.wave i:nth-child(8){height:110px}
+.wave i:nth-child(9){height:65px}
+.wave i:nth-child(10){height:90px}
+.wave i:nth-child(11){height:48px}
+.wave i:nth-child(12){height:72px}
+.wave i:nth-child(13){height:38px}
 
+/* YOUTUBE PLAYER */
 
-/* =========================
-   YOUTUBE PLAYER
-========================= */
+.player{
+    width:
+        min(760px,94vw);
 
-.youtube-box{
-    position:absolute;
-
-    z-index:30;
-
-    left:50%;
-    bottom:28px;
-
-    transform:translateX(-50%);
-
-    width:min(760px,92%);
-
-    height:105px;
-
-    padding:10px;
-
-    border-radius:60px;
+    padding:9px;
 
     background:
         linear-gradient(
             135deg,
-            rgba(77,48,20,.97),
-            rgba(29,20,9,.98)
+            rgba(76,48,19,.97),
+            rgba(25,18,8,.98)
         );
 
-    border:1px solid rgba(218,173,82,.35);
+    border:
+        1px solid
+        rgba(221,174,76,.4);
+
+    border-radius:32px;
 
     box-shadow:
-        0 20px 60px rgba(0,0,0,.9),
+        0 20px 70px rgba(0,0,0,.95),
         inset 0 1px rgba(255,255,255,.08);
 }
 
-.youtube-frame{
+.player iframe{
+    display:block;
+
     width:100%;
-    height:100%;
+
+    height:105px;
 
     border:0;
 
-    border-radius:50px;
+    border-radius:25px;
+
+    background:#000;
 }
 
+/* LABEL */
 
-/* =========================
-   MUSIC BUTTON
-========================= */
+.now-playing{
+    margin-top:12px;
 
-.music-button{
-    position:absolute;
+    color:#d8ad50;
 
-    z-index:40;
+    font-size:10px;
 
-    left:50%;
-    bottom:145px;
+    letter-spacing:4px;
 
-    transform:translateX(-50%);
+    text-align:center;
 
-    padding:10px 22px;
-
-    border-radius:30px;
-
-    color:#f1c966;
-
-    background:rgba(0,0,0,.65);
-
-    border:1px solid rgba(220,173,73,.45);
-
-    font-size:12px;
-
-    letter-spacing:2px;
+    opacity:.9;
 }
 
-
-/* =========================
-   DECORATION
-========================= */
-
-.gold-line{
-    position:absolute;
-
-    left:50%;
-    bottom:155px;
-
-    transform:translateX(-50%);
-
-    width:170px;
-    height:1px;
-
-    background:
-        linear-gradient(
-            90deg,
-            transparent,
-            #d5a844,
-            transparent
-        );
-
-    opacity:.7;
-}
-
-
-/* =========================
-   MOBILE
-========================= */
+/* MOBILE */
 
 @media(max-width:700px){
 
     .topbar{
-        top:15px;
-        left:15px;
-        right:15px;
+        height:62px;
+        padding:0 16px;
     }
 
-    .brand{
+    .logo{
         font-size:14px;
         letter-spacing:2px;
     }
 
-    .top-right{
+    .top-links{
         gap:10px;
-        font-size:10px;
+        font-size:9px;
     }
 
-    .logo{
+    .content{
+        min-height:
+            calc(100vh - 62px);
+
+        padding:
+            35px 12px 115px;
+    }
+
+    .brand{
         font-size:15vw;
+
         letter-spacing:2px;
     }
 
-    .subtitle{
-        font-size:9px;
+    .brand-sub{
+        font-size:8px;
         letter-spacing:4px;
+
+        margin-bottom:25px;
     }
 
     .vinyl{
-        width:230px;
-        height:230px;
+        width:205px;
+        height:205px;
 
-        transform:
-            translate(-50%,-50%)
-            translateY(75px);
+        margin-bottom:25px;
+    }
+
+    .vinyl::before{
+        width:65px;
+        height:65px;
     }
 
     .wave{
-        transform:
-            translate(-50%,-50%)
-            translateY(-5px)
-            scale(.7);
+        margin-top:-45px;
+
+        transform:scale(.75);
     }
 
-    .youtube-box{
-        width:94%;
-        height:90px;
+    .player{
+        width:96vw;
 
-        bottom:15px;
+        padding:6px;
 
-        border-radius:50px;
-
-        padding:7px;
+        border-radius:24px;
     }
 
-    .youtube-frame{
-        border-radius:43px;
+    .player iframe{
+        height:92px;
+
+        border-radius:19px;
     }
 
-    .music-button{
-        bottom:118px;
-
-        font-size:10px;
-
-        padding:8px 16px;
-    }
-
-    .gold-line{
-        bottom:132px;
+    .now-playing{
+        font-size:8px;
+        letter-spacing:3px;
     }
 }
 
+/* VERY SMALL SCREEN */
 
-/* =========================
-   SMALL MOBILE
-========================= */
+@media(max-width:380px){
 
-@media(max-width:400px){
+    .top-links{
+        display:none;
+    }
 
-    .logo{
-        font-size:17vw;
+    .brand{
+        font-size:16vw;
     }
 
     .vinyl{
-        width:190px;
-        height:190px;
+        width:180px;
+        height:180px;
     }
 
-    .youtube-box{
-        height:82px;
-    }
-
-    .top-right{
-        display:none;
+    .player iframe{
+        height:85px;
     }
 }
-
 </style>
 </head>
 
 
 <body>
 
-<div class="hero">
+<div class="page">
+
+    <!-- BACKGROUND -->
+    <div class="background"></div>
 
 
-    <!-- TOP BAR -->
+    <!-- TOP -->
+    <header class="topbar">
 
-    <div class="topbar">
-
-        <div class="brand">
+        <div class="logo">
             EKBAL PLAYLIST
         </div>
 
-        <div class="top-right">
-
-            <div class="top-item">
-                🎵 Music
-            </div>
-
-            <div class="top-item">
-                ▶ YouTube
-            </div>
-
+        <div class="top-links">
+            <span>♫ MUSIC</span>
+            <span>▶ YOUTUBE</span>
         </div>
 
-    </div>
+    </header>
 
 
+    <!-- CONTENT -->
+    <main class="content">
 
-    <!-- CENTER -->
-
-    <div class="center">
-
-        <div class="logo">
+        <!-- BRAND -->
+        <div class="brand">
             EKBAL
         </div>
 
-        <div class="subtitle">
+        <div class="brand-sub">
             PLAYLIST
         </div>
 
-    </div>
+
+        <!-- VINYL -->
+        <div class="vinyl"></div>
 
 
+        <!-- WAVEFORM -->
+        <div class="wave">
 
-    <!-- VINYL -->
+            <i></i>
+            <i></i>
+            <i></i>
+            <i></i>
+            <i></i>
+            <i></i>
+            <i></i>
+            <i></i>
+            <i></i>
+            <i></i>
+            <i></i>
+            <i></i>
+            <i></i>
 
-    <div class="vinyl"></div>
-
-
-
-    <!-- AUDIO WAVE -->
-
-    <div class="wave">
-
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-
-    </div>
+        </div>
 
 
+        <!-- YOUTUBE PLAYLIST -->
+        <section class="player">
 
-    <!-- GOLD LINE -->
+            <iframe
+                src="https://www.youtube.com/embed?listType=playlist&list=PLFtitMDpwfKY"
+                title="Ekbal Playlist"
+                allow="autoplay; encrypted-media; picture-in-picture; web-share"
+                allowfullscreen>
+            </iframe>
 
-    <div class="gold-line"></div>
-
-
-
-    <!-- LABEL -->
-
-    <div class="music-button">
-        NOW PLAYING • EKBAL PLAYLIST
-    </div>
-
+        </section>
 
 
-    <!-- YOUTUBE PLAYLIST -->
+        <div class="now-playing">
+            NOW PLAYING • EKBAL PLAYLIST
+        </div>
 
-    <div class="youtube-box">
-
-        <iframe
-            class="youtube-frame"
-            src="https://www.youtube.com/embed?listType=playlist&list=PLFtitMDpwfKY"
-            title="Ekbal Playlist"
-            allow="
-                autoplay;
-                encrypted-media;
-                picture-in-picture;
-                web-share
-            "
-            allowfullscreen>
-        </iframe>
-
-    </div>
-
+    </main>
 
 </div>
-
-
-<script>
-
-/* =========================
-   SIMPLE GOLD GLOW ANIMATION
-========================= */
-
-const vinyl =
-    document.querySelector(".vinyl");
-
-let angle = 0;
-
-function animateVinyl(){
-
-    angle += 0.08;
-
-    vinyl.style.transform =
-        `translate(-50%,-50%)
-         translateY(90px)
-         rotate(${angle}deg)`;
-
-    requestAnimationFrame(animateVinyl);
-}
-
-if(window.innerWidth > 700){
-    animateVinyl();
-}
-
-
-/* Mobile rotation */
-
-if(window.innerWidth <= 700){
-
-    function mobileVinyl(){
-
-        angle += 0.05;
-
-        vinyl.style.transform =
-            `translate(-50%,-50%)
-             translateY(75px)
-             rotate(${angle}deg)`;
-
-        requestAnimationFrame(mobileVinyl);
-    }
-
-    mobileVinyl();
-}
-
-</script>
 
 </body>
 </html>
