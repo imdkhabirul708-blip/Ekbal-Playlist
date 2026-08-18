@@ -2,603 +2,531 @@
 <html lang="hi">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>Ekbal Playlist</title>
 
 <style>
 *{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
 }
 
 body{
-    background:#111;
-    color:white;
-    font-family:Arial, Helvetica, sans-serif;
-    overflow-x:hidden;
+  background:#111;
+  color:#fff;
+  font-family:Arial,sans-serif;
 }
-
-/* MAIN HERO */
 
 .hero{
-    position:relative;
-    width:100%;
-    min-height:100vh;
-    overflow:hidden;
-
-    background-image:url("cover.jpg");
-    background-size:cover;
-    background-position:center;
+  position:relative;
+  width:100%;
+  min-height:100vh;
+  overflow:hidden;
+  background:#222;
 }
 
-/* DARK OVERLAY */
-
-.hero::after{
-    content:"";
-    position:absolute;
-    inset:0;
-
-    background:
-        linear-gradient(
-            to bottom,
-            rgba(0,0,0,.15),
-            rgba(0,0,0,.15) 45%,
-            rgba(0,0,0,.65)
-        );
-
-    z-index:1;
+.background{
+  position:absolute;
+  inset:0;
+  background-size:cover;
+  background-position:center;
+  transition:.3s;
 }
 
-
-/* TOP BAR */
+.overlay{
+  position:absolute;
+  inset:0;
+  background:linear-gradient(
+    to bottom,
+    rgba(0,0,0,.15),
+    rgba(0,0,0,.2) 45%,
+    rgba(0,0,0,.8)
+  );
+}
 
 .topbar{
-    position:absolute;
-    top:25px;
-    left:25px;
-    right:25px;
-
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-
-    z-index:5;
-
-    font-size:15px;
+  position:absolute;
+  z-index:5;
+  top:20px;
+  left:20px;
+  right:20px;
+  display:flex;
+  justify-content:space-between;
+  font-size:14px;
 }
-
-.top-left{
-    display:flex;
-    gap:20px;
-}
-
-.top-right{
-    display:flex;
-    gap:25px;
-}
-
-.top-item{
-    display:flex;
-    align-items:center;
-    gap:7px;
-
-    color:white;
-
-    text-shadow:0 2px 5px #000;
-}
-
-.icon{
-    font-size:19px;
-}
-
-
-/* BIG TITLE */
 
 .main-title{
-    position:absolute;
-
-    top:16%;
-    left:50%;
-
-    transform:translateX(-50%);
-
-    z-index:4;
-
-    width:90%;
-
-    text-align:center;
-
-    color:white;
-
-    font-size:clamp(55px,10vw,145px);
-
-    font-weight:900;
-
-    line-height:.85;
-
-    letter-spacing:-5px;
-
-    text-shadow:
-        0 4px 0 rgba(0,0,0,.5),
-        0 7px 20px rgba(0,0,0,.8);
+  position:absolute;
+  z-index:4;
+  top:18%;
+  left:50%;
+  transform:translateX(-50%);
+  width:95%;
+  text-align:center;
+  font-size:clamp(55px,11vw,150px);
+  line-height:.85;
+  font-weight:900;
+  text-shadow:0 5px 20px #000;
 }
 
 .main-title span{
-    display:block;
+  display:block;
 }
-
-
-/* MUSIC PLAYER */
 
 .player{
-    position:absolute;
-
-    z-index:6;
-
-    left:50%;
-    bottom:35px;
-
-    transform:translateX(-50%);
-
-    width:min(720px,92%);
-
-    height:115px;
-
-    background:
-        linear-gradient(
-            90deg,
-            rgba(85,45,35,.95),
-            rgba(112,57,45,.92)
-        );
-
-    border-radius:65px;
-
-    padding:15px 22px;
-
-    display:flex;
-    align-items:center;
-
-    gap:18px;
-
-    box-shadow:
-        0 15px 40px rgba(0,0,0,.6),
-        inset 0 1px rgba(255,255,255,.1);
-
-    backdrop-filter:blur(12px);
+  position:absolute;
+  z-index:6;
+  bottom:30px;
+  left:50%;
+  transform:translateX(-50%);
+  width:min(760px,94%);
+  min-height:110px;
+  padding:15px 20px;
+  border-radius:60px;
+  display:flex;
+  align-items:center;
+  gap:18px;
+  background:rgba(85,45,35,.94);
+  box-shadow:0 15px 40px #000;
 }
 
-
-/* SONG COVER */
-
-.song-cover{
-    width:80px;
-    height:80px;
-
-    flex-shrink:0;
-
-    border-radius:50%;
-
-    overflow:hidden;
-
-    border:3px solid rgba(255,255,255,.2);
-
-    box-shadow:0 4px 15px rgba(0,0,0,.5);
+.cover{
+  width:78px;
+  height:78px;
+  flex-shrink:0;
+  border-radius:50%;
+  overflow:hidden;
+  background:#333;
 }
 
-.song-cover img{
-    width:100%;
-    height:100%;
-
-    object-fit:cover;
+.cover img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
 }
 
-
-/* SONG INFO */
-
-.song-info{
-    flex:1;
-
-    min-width:0;
+.info{
+  flex:1;
+  min-width:0;
 }
 
 .song-name{
-    font-size:16px;
-
-    font-weight:bold;
-
-    white-space:nowrap;
-
-    overflow:hidden;
-
-    text-overflow:ellipsis;
+  font-size:16px;
+  font-weight:bold;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
 }
 
 .artist{
-    margin-top:5px;
-
-    font-size:12px;
-
-    opacity:.8;
+  color:#ddd;
+  font-size:12px;
+  margin-top:5px;
 }
 
 .progress{
-    width:100%;
-
-    height:4px;
-
-    margin-top:14px;
-
-    background:rgba(255,255,255,.3);
-
-    border-radius:10px;
-
-    overflow:hidden;
+  width:100%;
+  height:4px;
+  margin-top:13px;
+  background:#ffffff45;
+  border-radius:10px;
+  overflow:hidden;
 }
 
 .progress-bar{
-    width:35%;
-
-    height:100%;
-
-    background:white;
-
-    border-radius:10px;
+  width:0%;
+  height:100%;
+  background:white;
 }
 
-
-/* PLAYER BUTTONS */
-
-.player-controls{
-    display:flex;
-
-    align-items:center;
-
-    gap:18px;
+.controls{
+  display:flex;
+  align-items:center;
+  gap:15px;
 }
 
-.control{
-    border:0;
-
-    background:transparent;
-
-    color:white;
-
-    font-size:17px;
-
-    cursor:pointer;
-
-    transition:.2s;
-}
-
-.control:hover{
-    transform:scale(1.15);
+.controls button{
+  border:0;
+  background:transparent;
+  color:white;
+  cursor:pointer;
+  font-size:18px;
 }
 
 .play{
-    width:52px;
-    height:52px;
-
-    border-radius:50%;
-
-    background:white;
-
-    color:#6d3529;
-
-    display:flex;
-
-    justify-content:center;
-
-    align-items:center;
-
-    font-size:20px;
-
-    border:0;
-
-    cursor:pointer;
-
-    box-shadow:0 5px 15px rgba(0,0,0,.3);
+  width:50px;
+  height:50px;
+  border-radius:50%;
+  background:white!important;
+  color:#6b3328!important;
+  font-size:18px!important;
 }
 
+.upload-area{
+  position:absolute;
+  z-index:10;
+  left:50%;
+  top:58%;
+  transform:translate(-50%,-50%);
+  display:flex;
+  gap:10px;
+}
 
-/* MOBILE */
+.upload{
+  background:rgba(0,0,0,.7);
+  border:1px solid #fff5;
+  color:white;
+  padding:11px 16px;
+  border-radius:25px;
+  cursor:pointer;
+  font-size:13px;
+  backdrop-filter:blur(8px);
+}
 
-@media(max-width:700px){
+.upload:hover{
+  background:#fff;
+  color:#111;
+}
 
-    .topbar{
-        top:15px;
-        left:15px;
-        right:15px;
+input[type=file]{
+  display:none;
+}
 
-        font-size:12px;
-    }
+@media(max-width:650px){
 
-    .top-left{
-        gap:10px;
-    }
+  .player{
+    width:95%;
+    min-height:90px;
+    padding:10px 13px;
+    gap:10px;
+  }
 
-    .top-right{
-        gap:10px;
-    }
+  .cover{
+    width:58px;
+    height:58px;
+  }
 
-    .main-title{
-        top:20%;
+  .song-name{
+    font-size:12px;
+  }
 
-        font-size:18vw;
+  .artist{
+    font-size:10px;
+  }
 
-        letter-spacing:-3px;
-    }
+  .controls{
+    gap:7px;
+  }
 
-    .player{
-        bottom:15px;
+  .controls button{
+    font-size:13px;
+  }
 
-        height:90px;
+  .play{
+    width:40px;
+    height:40px;
+  }
 
-        padding:10px 14px;
+  .upload-area{
+    top:55%;
+    flex-direction:column;
+    width:160px;
+  }
 
-        gap:10px;
-
-        border-radius:50px;
-    }
-
-    .song-cover{
-        width:60px;
-        height:60px;
-    }
-
-    .song-name{
-        font-size:12px;
-    }
-
-    .artist{
-        font-size:10px;
-    }
-
-    .progress{
-        margin-top:8px;
-    }
-
-    .player-controls{
-        gap:7px;
-    }
-
-    .control{
-        font-size:13px;
-    }
-
-    .play{
-        width:40px;
-        height:40px;
-
-        font-size:15px;
-    }
+  .upload{
+    text-align:center;
+  }
 }
 </style>
 </head>
 
-
 <body>
-
 
 <div class="hero">
 
+  <div
+    class="background"
+    id="background"
+  ></div>
 
-    <!-- TOP BAR -->
-
-    <div class="topbar">
-
-        <div class="top-left">
-
-            <div class="top-item">
-                <span class="icon">●</span>
-                11 PM
-            </div>
-
-            <div class="top-item">
-                <span class="icon">☁</span>
-                20°
-            </div>
-
-        </div>
+  <div class="overlay"></div>
 
 
-        <div class="top-right">
+  <div class="topbar">
+    <span>🎵 EKBAL</span>
+    <span>YT Music</span>
+  </div>
 
-            <div class="top-item">
-                ⚙
-                Spotify
-            </div>
 
-            <div class="top-item">
-                ◉
-                YT Music
-            </div>
+  <div class="main-title">
+    <span>दिल से</span>
+    <span>सुकून</span>
+  </div>
 
-        </div>
+
+  <!-- IMAGE + SONG UPLOAD -->
+
+  <div class="upload-area">
+
+    <label class="upload">
+      🖼️ अपनी Image चुनें
+      <input
+        type="file"
+        id="imageInput"
+        accept="image/*"
+      >
+    </label>
+
+    <label class="upload">
+      🎵 अपना Song चुनें
+      <input
+        type="file"
+        id="songInput"
+        accept="audio/*"
+      >
+    </label>
+
+  </div>
+
+
+  <!-- PLAYER -->
+
+  <div class="player">
+
+    <div class="cover">
+      <img
+        id="coverImage"
+        alt="Cover"
+      >
+    </div>
+
+
+    <div class="info">
+
+      <div
+        class="song-name"
+        id="songName"
+      >
+        अपना Song चुनें
+      </div>
+
+      <div
+        class="artist"
+        id="artist"
+      >
+        Ekbal Music
+      </div>
+
+      <div class="progress">
+        <div
+          class="progress-bar"
+          id="progressBar"
+        ></div>
+      </div>
 
     </div>
 
 
+    <div class="controls">
 
-    <!-- MAIN TITLE -->
+      <button id="previous">
+        ⏮
+      </button>
 
-    <div class="main-title">
+      <button
+        class="play"
+        id="play"
+      >
+        ▶
+      </button>
 
-        <span>दिल से</span>
-
-        <span>सुकून</span>
-
-    </div>
-
-
-
-    <!-- MUSIC PLAYER -->
-
-    <div class="player">
-
-
-        <!-- COVER -->
-
-        <div class="song-cover">
-
-            <img
-                src="cover.jpg"
-                alt="Song Cover"
-            >
-
-        </div>
-
-
-
-        <!-- SONG DETAILS -->
-
-        <div class="song-info">
-
-            <div class="song-name">
-                Mujhse Mohabbat Ka Izhaar Karta
-            </div>
-
-            <div class="artist">
-                Ekbal Music Official
-            </div>
-
-
-            <div class="progress">
-
-                <div
-                    class="progress-bar"
-                    id="progressBar">
-                </div>
-
-            </div>
-
-        </div>
-
-
-
-        <!-- CONTROLS -->
-
-        <div class="player-controls">
-
-            <button
-                class="control"
-                onclick="previousSong()">
-                ⏮
-            </button>
-
-
-            <button
-                class="play"
-                id="playButton"
-                onclick="togglePlay()">
-
-                ▶
-
-            </button>
-
-
-            <button
-                class="control"
-                onclick="nextSong()">
-
-                ⏭
-
-            </button>
-
-        </div>
+      <button id="next">
+        ⏭
+      </button>
 
     </div>
+
+  </div>
 
 </div>
 
 
+<audio id="audio"></audio>
+
 
 <script>
 
-let playing = false;
+const imageInput =
+  document.getElementById("imageInput");
 
-let progress = 35;
+const songInput =
+  document.getElementById("songInput");
 
-function togglePlay(){
+const background =
+  document.getElementById("background");
 
-    const button =
-        document.getElementById("playButton");
+const coverImage =
+  document.getElementById("coverImage");
 
-    if(!playing){
+const audio =
+  document.getElementById("audio");
 
-        playing = true;
+const play =
+  document.getElementById("play");
 
-        button.innerHTML = "❚❚";
+const songName =
+  document.getElementById("songName");
+
+const progressBar =
+  document.getElementById("progressBar");
+
+
+/* IMAGE SELECT */
+
+imageInput.addEventListener(
+  "change",
+  function(){
+
+    const file = this.files[0];
+
+    if(!file) return;
+
+    const imageURL =
+      URL.createObjectURL(file);
+
+    background.style.backgroundImage =
+      `url("${imageURL}")`;
+
+    coverImage.src =
+      imageURL;
+
+  }
+);
+
+
+/* SONG SELECT */
+
+songInput.addEventListener(
+  "change",
+  function(){
+
+    const file = this.files[0];
+
+    if(!file) return;
+
+    const songURL =
+      URL.createObjectURL(file);
+
+    audio.src =
+      songURL;
+
+    songName.textContent =
+      file.name.replace(/\.[^/.]+$/,"");
+
+    play.textContent =
+      "▶";
+
+  }
+);
+
+
+/* PLAY / PAUSE */
+
+play.addEventListener(
+  "click",
+  function(){
+
+    if(!audio.src){
+
+      alert(
+        "पहले अपना Song चुनें"
+      );
+
+      return;
+    }
+
+    if(audio.paused){
+
+      audio.play();
+
+      play.textContent =
+        "❚❚";
 
     }else{
 
-        playing = false;
+      audio.pause();
 
-        button.innerHTML = "▶";
-
-    }
-
-}
-
-
-function nextSong(){
-
-    progress = 0;
-
-    document.getElementById(
-        "progressBar"
-    ).style.width = "0%";
-
-    setTimeout(()=>{
-
-        progress = 35;
-
-        document.getElementById(
-            "progressBar"
-        ).style.width = "35%";
-
-    },300);
-
-}
-
-
-function previousSong(){
-
-    progress = 0;
-
-    document.getElementById(
-        "progressBar"
-    ).style.width = "0%";
-
-}
-
-
-/* DEMO PROGRESS */
-
-setInterval(()=>{
-
-    if(playing){
-
-        progress += .15;
-
-        if(progress >= 100){
-
-            progress = 0;
-
-        }
-
-        document.getElementById(
-            "progressBar"
-        ).style.width =
-            progress + "%";
+      play.textContent =
+        "▶";
 
     }
 
-},1000);
+  }
+);
+
+
+/* PROGRESS */
+
+audio.addEventListener(
+  "timeupdate",
+  function(){
+
+    if(!audio.duration) return;
+
+    const percent =
+      (audio.currentTime /
+       audio.duration) * 100;
+
+    progressBar.style.width =
+      percent + "%";
+
+  }
+);
+
+
+/* SONG END */
+
+audio.addEventListener(
+  "ended",
+  function(){
+
+    play.textContent =
+      "▶";
+
+    progressBar.style.width =
+      "0%";
+
+  }
+);
+
+
+/* PREVIOUS */
+
+document
+.getElementById("previous")
+.addEventListener("click",function(){
+
+  audio.currentTime = 0;
+
+});
+
+
+/* NEXT */
+
+document
+.getElementById("next")
+.addEventListener("click",function(){
+
+  audio.currentTime = 0;
+
+  if(audio.src){
+    audio.play();
+  }
+
+});
 
 </script>
-
 
 </body>
 </html>
